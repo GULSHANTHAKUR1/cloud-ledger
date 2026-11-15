@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper functions ──────────────────────────────────────────────────────
+    function isSignedIn()   { return request.auth != null; }
+    function isAdmin()      { return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['super_admin', 'admin']; }
+    function isSuperAdmin() { return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'super_admin'; }
+    function isStaff()      { return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'staff'; }
+    function isClient()     { return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'client'; }
+
+    // ── Enquiries (from public website form) ─────────────────────────────────
+    // Anyone can create (public contact form). Only admins can read.
+    match /enquiries/{id} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ── Users ─────────────────────────────────────────────────────────────────
+    // Super admin reads/writes all. Each user reads own doc. Admins read all.
+    match /users/{userId} {
+      allow read:   if isSuperAdmin() || isAdmin() || request.auth.uid == userId;
+      allow create: if isSuperAdmin();
+      allow update: if isSuperAdmin() || request.auth.uid == userId;
+      allow delete: if isSuperAdmin();
+    }
+
+    // ── Clients ───────────────────────────────────────────────────────────────
+    match /clients/{clientId} {
+      allow read, write: if isAdmin();
+      // Client can read own record
+      allow read: if isClient() && resource.data.userId == request.auth.uid;
+    }
+
+    // ── Tasks ─────────────────────────────────────────────────────────────────
+    match /tasks/{taskId} {
+      allow read, write: if isAdmin();
+      // Staff can read and update only their assigned tasks
+      allow read:   if isStaff() && resource.data.assignedTo == request.auth.uid;
+      allow update: if isStaff() && resource.data.assignedTo == request.auth.uid;
+      // Client reads tasks linked to their client record
+      allow read:   if isClient() && resource.data.clientUserId == request.auth.uid;
+    }
+
+    // ── Documents ─────────────────────────────────────────────────────────────
+    match /documents/{docId} {
+      allow read, write: if isAdmin();
+      allow read: if isClient() && resource.data.clientUserId == request.auth.uid && resource.data.isReleased == true;
+      allow read: if isStaff() && resource.data.assignedTo == request.auth.uid;
+    }
+  }
+}
+

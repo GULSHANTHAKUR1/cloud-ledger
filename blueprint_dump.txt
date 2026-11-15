@@ -1,0 +1,369 @@
+CLOUD LEDGER
+WORDPRESS WEBSITE & BUSINESS MANAGEMENT PLATFORM
+Developer Requirement Specification (DRS)
+Website: cloudledger.in
+Platform: WordPress (Custom Theme + Custom Plugin)
+Version: 1.0 | 14 November 2026
+Prepared as a development handover document
+Document Control
+1. Executive Summary
+Build Cloud Ledger as a public professional-services website combined with a secure business application. Visitors must be able to understand each service before enquiring. Clients must be able to log in, view only their own documents, track work and submit requests. Admin controls assignment. Staff work only on tasks assigned to them. Super Admin has the highest level of control.
+Public website: service catalogue, detailed service guides, industries, resources and contact forms.
+Knowledge centre: articles, regulatory updates, FAQs, downloadable checklists and related service links.
+Operations: client/company master, task management, request management, document vault and notifications.
+Access control: Super Admin, Admin, Staff and Client roles with server-side permissions.
+Scalable design: support at least 315 initial service pages, four or more Staff users, multiple clients and future branches.
+2. WordPress Implementation Approach
+Use WordPress as the CMS, but do not build the business application entirely inside a theme. The theme should control presentation; custom plugins should control business logic and data. This keeps the portal and workflows functional even if the visual theme is changed.
+Do not store all operational records as ordinary blog posts or expose private documents through public Media Library URLs. Use custom tables for structured records and private storage with permission-checked download links.
+3. Brand, Design and User Experience
+Professional, clean, India-focused business design; white base with navy and restrained green accents.
+Mobile-first, responsive layouts for desktop, tablet and mobile.
+Readable typography, clear calls to action, accessible colour contrast and keyboard-friendly controls.
+Use diagrams, icons, tables and illustrations where they explain a process; avoid unnecessary animation and excessive stock people photographs.
+Do not use the phrase “Chartered Accountant” in general branding/promotional copy, as requested. Any legally required professional designation or regulated claim must still be reviewed and presented accurately.
+Provide a consistent search facility for services, articles and resources.
+4. Public Website Sitemap
+5. Service Catalogue and 315-Page Content Plan
+Create a dynamic Service custom content type with categories and reusable page templates. The following is a planning target, not a requirement to publish thin or duplicate pages. Only publish services that Cloud Ledger can provide directly or through appropriately qualified partners.
+5.1 Service categories and examples
+5.2 Standard service page template
+Service title and short summary.
+Meaning, purpose and business benefits.
+Who needs the service and applicability/eligibility.
+Types, options or registration categories.
+Required documents, separated by entity type where relevant.
+Step-by-step procedure and responsible authority/portal.
+Government charges and professional fees, clearly separated; show “subject to confirmation” where variable.
+Indicative timeline with dependencies and no guarantee of statutory approval.
+Recurring compliance, return types and frequency, where applicable.
+Due dates, late fees, interest and consequences, with date/version references.
+Applicable law/rules and official source links.
+FAQs, common errors and practical checklist.
+Related services, consultation form and request-service button.
+Last reviewed date, reviewer and content disclaimer.
+5.3 Examples of service-page detail
+GST Registration page: explain applicability, compulsory/voluntary registration, composition versus regular scheme, entity-wise documents, principal/additional place of business, owned/rented/consented premises evidence, online application stages, ARN/GSTIN, amendments/cancellation and applicable return obligations such as GSTR-1, GSTR-3B and annual returns. Do not state a universal return frequency: explain that frequency depends on taxpayer type, scheme and current rules.
+Private Limited Incorporation page: explain minimum director/member requirements, DIN/DSC, name reservation, share capital concepts, registered office evidence, MOA/AOA, incorporation forms, PAN/TAN, certificate of incorporation and post-incorporation compliances. Do not imply a universally mandatory minimum paid-up capital where the law does not prescribe one; distinguish authorised capital, subscribed capital and paid-up capital.
+All legal/tax content must be reviewed against current official requirements before publication. Add a content review date and source links.
+6. Blog and Knowledge Centre
+Blog categories: GST, Income Tax, MCA, NGO, Accounting, Audit, Finance, MSME, Project Finance, MIS, Analytics, Internal Controls and Business Management.
+Admin/editor can create, edit, save drafts, schedule, publish, unpublish and archive posts.
+Support featured image, author, category, tags, excerpt, SEO title/description and related service links.
+Maintain revision history and editorial approval before publication.
+Regulatory updates must include notification/circular/reference number, issuing authority, effective date and official source link where available.
+Add “last reviewed” date and reviewer for compliance-sensitive articles.
+Link each relevant article to one or more service pages and a consultation/request action.
+7. User Roles and Permissions
+Super Admin has full control. Admin manages day-to-day work but cannot permanently delete records by default. Staff cannot assign work to other Staff and cannot delete records. Permissions must be checked on the server for every operation; hiding a button is not security.
+8. Client Registration and Secure Login
+Client login identifier may be the PAN number, as requested, but use an internal random Client ID as the database primary key.
+Verify mobile number and email using OTP or another secure verification process before activation.
+Client sets their own password; store only a strong one-way password hash using WordPress authentication/security mechanisms. Never expose passwords to Admin.
+Mask PAN in normal screens and logs. Restrict access to full PAN to authorised roles and business need.
+Provide password reset, login throttling, session security and optional multi-factor authentication for privileged accounts.
+Avoid exposing PAN in URLs, public page source, analytics or notification messages.
+Define an account activation and identity-verification process before displaying sensitive documents.
+9. Client Portal
+Client dashboard modules:
+My Profile and authorised company/entity details.
+My Documents and downloadable certificates/reports.
+My Services and service history.
+My Tasks and current status.
+Raise a New Request.
+Pending Information / documents required from client.
+Notifications and communication history.
+Support/query history.
+9.1 Document categories
+GST registration certificate, returns, notices and replies.
+PAN, TAN and tax records.
+ITR acknowledgements, computations and tax documents.
+Balance Sheet, Profit & Loss, Cash Flow and MIS reports.
+MSME/Udyam certificate.
+Certificate of Incorporation, MOA, AOA and MCA filings.
+Audit reports, PF/ESIC documents and other client-specific records.
+9.2 Document controls
+Documents must be private by default and accessible only after server-side authorisation.
+Use protected file storage or private object storage; do not rely on unguessable public URLs.
+Store metadata: client, company, category, financial year, issue date, expiry date, uploaded by, version and visibility.
+Support version history, replacement, archive and controlled download.
+Log upload, view/download, replacement and deletion events where appropriate.
+Scan uploads for malware; restrict file types and size; validate MIME type and file extension.
+10. Client Service Request System
+Clients must be able to submit requests without calling the office for routine document copies or new work.
+Request form fields: Request Number, Client ID, Company, category, requested service/document, description, attachment, submission timestamp, priority and status.
+Workflow: Client submits → Admin receives notification → Admin reviews → Admin manually assigns Staff → Staff works and uploads output → Admin verifies where required → Client is notified → Client downloads/views output. Automatic Staff assignment is not required in the initial release.
+Request statuses: New, Under Review, Assigned, In Process, Waiting for Client, Pending Approval, Completed, Delivered, On Hold and Cancelled.
+11. Task Management
+Task fields: Task ID, Client, Company, service category, title, detailed description, assigned Staff, created by, priority, start date, due date, status, remarks, attachments and completion date.
+Admin/Super Admin create, assign and reassign tasks.
+Initial setup supports at least four Staff accounts; architecture must support adding more.
+Staff dashboard shows only assigned tasks and authorised client details.
+Staff can update progress, add work notes and upload deliverables.
+Admin can review, return for correction, approve and mark delivered.
+Support recurring tasks and compliance periods as a later phase.
+Overdue tasks and approaching deadlines must be highlighted.
+12. Notifications
+In-app notification for new request, assignment, status update and document availability.
+Email notifications for important events.
+SMS and WhatsApp Business integration may be added through approved providers.
+Maintain notification event, recipient, channel, delivery status and timestamp.
+Do not send full PAN, passwords or sensitive documents in notification text.
+13. CRM and Client/Company Management
+Client master fields: internal Client ID, name, PAN (protected/masked), mobile, email, address, client type, industry, onboarding date, relationship owner and status.
+Company master fields: internal Company ID, legal name, entity type, CIN/LLPIN where applicable, GSTIN, registered/principal address, financial year, linked client and status.
+One client may be linked to multiple companies/entities.
+Each company may have multiple services, requests, tasks and documents.
+Search and filter by client, company, PAN (restricted), GSTIN, service, Staff and status.
+Show a consolidated client timeline of requests, tasks, documents and communications.
+14. Database Architecture
+Use WordPress users for authentication and custom tables for structured business records. Use the site's actual table prefix; the names below are logical examples.
+Use internal numeric/UUID identifiers as primary keys. PAN, GSTIN and email must not be used as primary keys. Add indexes for common filters and foreign-key relationships where supported. Use database migrations and version the schema in the custom plugin.
+15. Database Relationships
+One Client can have multiple Companies.
+One Client/Company can have multiple Service Requests.
+One Client/Company can have multiple Tasks.
+One Task can have one or more assignment-history records.
+One Client/Company can have multiple Documents and Document Versions.
+One Request can create one or more Tasks if the work needs separate assignments.
+Every important action can create an Audit Log record.
+16. Admin Dashboard
+Dashboard widgets:
+Total Clients and active companies.
+New client requests and unassigned requests.
+Tasks by status and priority.
+Overdue tasks and upcoming deadlines.
+Staff-wise workload and completion.
+Documents awaiting verification.
+Recently uploaded documents.
+Recent activity and audit alerts.
+Admin menu: Dashboard, Clients, Companies, Service Requests, Tasks, Staff, Documents, Services, Blog, Notifications, Reports and Settings (only permitted items).
+17. Staff Dashboard
+My Tasks, Today's Tasks, Upcoming Deadlines and Overdue Tasks.
+Task details and authorised client/company information.
+Update status and add remarks.
+Upload deliverables and supporting documents.
+View returned-for-correction tasks.
+Work history and personal workload summary.
+18. Super Admin Controls and Audit Trail
+Manage all user accounts, role assignments and permissions.
+Control deletion and recovery of records.
+Review all tasks, requests, documents and reports.
+View audit history: who performed what action, on which record and when.
+Use soft deletion/recycle bin for recoverable operational records.
+Permanent deletion must be restricted, confirmed and logged; apply retention and legal requirements.
+19. Security, Privacy and Compliance
+Use HTTPS across the whole website.
+Use least-privilege role permissions and server-side authorisation checks.
+Protect forms with nonce/CSRF protection, input validation, sanitisation and output escaping.
+Use prepared database queries and secure upload handling.
+Rate-limit login and OTP attempts; protect against brute-force attacks.
+Use secure password reset and session management.
+Keep private documents outside public web access or behind authorised download controllers.
+Encrypt sensitive data at rest where feasible; protect backups and keys.
+Maintain security updates, malware scanning, backup and recovery procedures.
+Maintain a privacy notice, consent records, data retention policy and incident-response process.
+Assess applicable Indian data protection, tax, professional and record-retention requirements before launch.
+20. SEO AND PERFORMANCE
+SEO-friendly URLs, titles, meta descriptions and canonical tags.
+XML sitemap and robots configuration.
+Structured data where appropriate and accurate.
+Internal links between categories, service pages, FAQs and blogs.
+Optimised images, caching, minification and CDN where appropriate.
+Mobile performance and Core Web Vitals testing.
+Accessible navigation, headings and form labels.
+Prevent private portal pages and documents from being indexed by search engines.
+21. REPORTING AND FUTURE MIS
+The architecture should be prepared for future branch-wise and management MIS reporting, even if advanced MIS is delivered in a later phase.
+Branch-wise client and service volumes.
+Staff-wise task allocation and completion.
+Pending, overdue and turnaround-time reports.
+Service category performance.
+Document/request turnaround.
+Future financial reporting and branch expense dashboards, subject to a separately approved data model.
+22. Suggested WordPress Admin Menu
+23. Recommended Development Phases
+24. Testing and Acceptance Criteria
+A visitor can find a service and read its complete information page on mobile and desktop.
+Admin can add/edit/publish service pages and blog posts without coding.
+Super Admin can create users and control permissions.
+Admin can create a client request/task and manually assign it to one of at least four Staff users.
+Staff can see and update only authorised assigned tasks.
+Staff and Admin cannot permanently delete records under the default permission model.
+Client can securely log in and view only their own authorised documents and requests.
+Client can submit a request and see its status.
+Staff can upload a deliverable and Admin can verify/release it.
+Audit logs capture critical changes and assignments.
+Private files cannot be accessed by another client or an unauthorised user, including by guessing a URL.
+Backups can be restored and the site passes security, responsive and performance checks.
+25. Developer Deliverables
+Custom WordPress theme source code.
+Custom business plugin source code and database migrations.
+Responsive UI/UX designs and page templates.
+Database schema and relationship diagram.
+Role and permission matrix.
+Admin, Staff and Client portal interfaces.
+Service and blog content templates.
+Installation and configuration guide.
+Admin and Staff user manuals.
+Backup, restore and maintenance documentation.
+Testing report and known-issues list.
+Source code, deployment credentials handover and ownership documentation.
+26. Important Scope Clarifications
+The 315 service pages are a content target; the development team must build reusable templates and content management, not hard-code 315 separate layouts.
+Content writing, legal verification, professional review, translations and ongoing daily publishing should be separately estimated unless included in the contract.
+SMS, WhatsApp, email delivery, cloud storage, paid plugins, hosting and third-party API charges may involve recurring costs.
+Any regulated service, audit/signing/certification activity or DSA/financial product activity must be offered only where the business and assigned professionals are legally authorised.
+The initial version uses manual Staff assignment by Admin/Super Admin; automatic assignment is not part of the initial scope.
+Advanced accounting integrations, payment collection, e-signatures, recurring compliance automation and branch financial MIS can be separate future phases.
+27. Questions to Finalise Before Development
+Confirm hosting provider, server plan and whether staging and production environments are available.
+Confirm final brand logo, colours, fonts and contact details.
+Confirm number of Admin accounts and initial four Staff names/accounts.
+Confirm whether clients can upload documents or only submit requests and download documents.
+Confirm whether online payment/fee collection is required in the first release.
+Confirm email, SMS and WhatsApp notification providers and budgets.
+Confirm who will write and legally review service content and daily blogs.
+Confirm document retention, backup frequency and storage budget.
+Confirm whether multi-branch functionality is required at launch or reserved for Phase 2.
+28. Final Development Direction
+Build Cloud Ledger as a WordPress-powered content website with a separately engineered custom business plugin. Keep public content, authentication, business records and private documents logically separated. Prioritise security, maintainability, responsive design and simple administration. The system must be expandable without rebuilding the website when additional services, Staff, clients or branches are added.
+END OF REQUIREMENT SPECIFICATION
+
+--- TABLE ---
+Item | Specification
+Project | Cloud Ledger website and integrated operations platform
+CMS | WordPress
+Frontend | Custom responsive WordPress theme
+Business application | Custom plugin(s) for CRM, tasks, client portal and document workflows
+Initial users | 1 Super Admin, Admin account(s), minimum 4 Staff, multiple Clients
+Initial content target | 315 planned service information pages; expandable
+Primary domain | cloudledger.in
+Document status | Requirements baseline for estimation, design and development
+
+--- TABLE ---
+Layer | Recommended implementation | Responsibilities
+WordPress core | Latest stable supported WordPress release | CMS, users, media framework, posts and pages
+Custom theme | Cloud Ledger custom theme | Header, footer, navigation, service layouts, blog layouts, responsive UI
+Custom business plugin | Cloud Ledger Core plugin | Clients, companies, tasks, requests, permissions, approvals, audit logs
+Portal interface | Templates/shortcodes or block patterns from plugin | Admin, Staff and Client dashboards
+Database | WordPress database + prefixed custom tables | Structured operational records and relationships
+Private file storage | Protected storage outside public web access or secure object storage | Client documents and work attachments
+Integrations | Approved email/SMS/WhatsApp/payment providers as required | Notifications and future integrations
+
+--- TABLE ---
+Page / section | Required content or functionality
+Home | Hero message, service search, popular services, categories, industries, latest articles, enquiry CTA, contact details
+About | Overview, mission, vision, approach, team/experience, contact details
+Services | Category landing pages, searchable service directory, filters and individual service pages
+Industries | Solutions for relevant sectors such as SMEs, companies, NGOs, FPOs and other supported segments
+Knowledge Centre | Guides, FAQs, checklists, explainers and resources
+Daily Blog & Updates | Articles, category archive, author, publication date and official references
+Resources & Downloads | Public checklists/templates and gated client documents where appropriate
+Contact | Address, phone/email, map if desired, enquiry form and privacy notice
+Login | Separate entry points for Member/Staff and Client Portal
+
+--- TABLE ---
+Service category | Target pages
+GST & Indirect Taxation | 35
+Income Tax & Direct Taxation | 30
+Company Incorporation & MCA | 40
+NGO, Trust & Society | 25
+Accounting & Bookkeeping | 25
+Audit & Assurance | 20
+MIS & Management Consultancy | 20
+Data Analytics & Data Management | 15
+Project Reports & Financial Modelling | 25
+MSME & Business Registrations | 20
+PF, ESIC & Labour Compliance | 15
+Environmental & Feasibility Studies | 10
+FPO & Institutional Services | 10
+Business Process & Internal Controls | 15
+Other Business Support Services | 10
+TOTAL | 315
+
+--- TABLE ---
+Category | Example service topics
+GST | Registration, amendments, cancellation, GSTR-1, GSTR-3B, annual returns, reconciliation, notices and replies
+Income Tax | ITR filing, tax computation, TDS/TCS, tax audit support, notices, advance tax and compliance
+Company & MCA | Private limited, OPC, LLP, partnership support, incorporation, annual filing, director changes, charge filings
+NGO & Trust | Trust/society/Section 8 setup support, 12A/80G, NGO compliance, FCRA-related support where eligible
+Accounting | Bookkeeping, ledger scrutiny, bank reconciliation, monthly closing and financial statements
+Audit | Internal audit, audit support, process review, stock audit support and other eligible audit-related services
+MIS & Management | MIS reports, branch performance, budget vs actual, segment reporting, management dashboards
+Data & Analytics | Data cleaning, data mining, data validation, reconciliation, analytics and backup planning
+Project & Finance | Project reports, CMA data, projections, feasibility analysis and loan documentation
+MSME & Registrations | Udyam/MSME, business registrations and applicable licences
+Labour Compliance | PF, ESIC and related registrations/returns, subject to eligibility and authorisation
+Environmental | Environmental studies, documentation and feasibility support within qualified scope
+FPO & Institutional | FPO accounting, reporting, compliance and institutional support
+Internal Controls | SOPs, cost control, internal control reviews, process mapping and risk reporting
+
+--- TABLE ---
+Capability | Super Admin | Admin | Staff | Client
+Manage all users | Yes | Limited, if authorised | No | No
+Create/edit clients | Yes | Yes | No, unless specifically authorised | Own profile only
+Create tasks | Yes | Yes | No | Submit request only
+Assign/reassign tasks | Yes | Yes | No | No
+Work on tasks | All | All permitted | Assigned tasks only | View own status
+Upload documents | Yes | Yes | Assigned work only | Optional client uploads
+Approve/release documents | Yes | Yes | No, unless specifically authorised | No
+Delete operational records | Yes | No by default | No | No
+View all clients | Yes | Yes, permitted scope | No | No
+View reports | All | Permitted reports | Own workload only | Own requests/tasks
+Manage services/blogs | Yes | If authorised | Draft contribution only if authorised | No
+System settings/audit logs | Yes | Limited | No | No
+
+--- TABLE ---
+Request type | Examples
+Document request | GST certificate, ITR acknowledgement, balance sheet or old filing copy
+Screenshot request | Portal status, challan, filing acknowledgement or other permitted evidence
+New service request | GST registration, ITR filing, company incorporation, MCA filing
+Compliance support | GST/Income Tax/MCA query or notice assistance
+Other query | General support or clarification
+
+--- TABLE ---
+Logical table | Purpose / key fields
+wp_users / wp_usermeta | Login accounts and role metadata
+cl_clients | Client ID, user ID, name, protected PAN, mobile, email, status
+cl_companies | Company ID, client ID, legal name, entity type, CIN/GSTIN, address
+cl_staff_profiles | User ID, staff code, designation, active status
+cl_service_categories | Category ID, name, slug, parent category
+cl_tasks | Task ID, client/company, title, description, due date, priority, status
+cl_task_assignments | Task ID, staff user ID, assigned by, assigned date, assignment status
+cl_requests | Request ID, client/company, type, description, status, timestamps
+cl_documents | Document ID, client/company, category, private storage key, metadata
+cl_document_versions | Document ID, version, storage key, uploaded by, timestamp
+cl_approvals | Record type/ID, approver, decision, remarks, timestamp
+cl_comments | Task/request ID, author, comment, visibility, timestamp
+cl_notifications | Recipient, event, channel, delivery status, timestamp
+cl_audit_logs | Actor, action, object type/ID, timestamp, permitted metadata
+cl_branches | Branch ID, name, address, active status
+cl_service_records | Client/company, service, period, status, assigned team
+
+--- TABLE ---
+Menu | Submenus
+Dashboard | Overview, alerts, workload
+Clients | All clients, add client, client profile
+Companies | All companies, add company
+Requests | New, under review, assigned, completed
+Tasks | All tasks, create task, task calendar
+Staff | Staff list, profiles, workload
+Documents | Categories, uploads, verification, archive
+Services | Categories, all services, add service
+Blog | Posts, categories, tags, drafts, scheduled
+Reports | Task, client, staff and service reports
+Users & Roles | Accounts and permitted role settings
+Audit Logs | Activity and record history
+Settings | Notifications, security, integrations
+
+--- TABLE ---
+Phase | Deliverables
+Phase 1 – Discovery & Design | Confirm requirements, user journeys, wireframes, brand system, database schema and acceptance criteria
+Phase 2 – Public Website | Custom theme, navigation, home, about, contact, service categories and reusable service template
+Phase 3 – Content System | Service catalogue, blog, Knowledge Centre, SEO and resources
+Phase 4 – User & CRM | Roles, client/company master, Staff profiles and permissions
+Phase 5 – Tasks & Requests | Task creation, manual Staff assignment, request workflow, status history and notifications
+Phase 6 – Client Portal | Secure login, document vault, downloads, service requests and client task tracking
+Phase 7 – Reports & Security | Dashboards, audit logs, security review, backup and performance optimisation
+Phase 8 – Testing & Launch | UAT, bug fixes, migration, training, deployment and handover
