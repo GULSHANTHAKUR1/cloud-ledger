@@ -263,6 +263,7 @@ export default function Hero() {
 
         <style>{`
           @media (max-width: 992px) {
+            #hero { padding-top: 130px !important; }
             .hero-grid-layout { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
             .hero-visual-card { display: block !important; max-width: 540px; margin: 1rem auto 0; width: 100%; }
           }
