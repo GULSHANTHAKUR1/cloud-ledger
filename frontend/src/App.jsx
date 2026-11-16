@@ -1,30 +1,33 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
+import './theme.css'
+import './index.css'
 import { AuthProvider, useAuth } from './context/AuthContext'
 
 // Public components
-import Navbar        from './components/Navbar'
-import Hero          from './components/Hero'
-import Services      from './components/Services'
-import About         from './components/About'
-import Resources     from './components/Resources'
-import Industries    from './components/Industries'
-import Knowledge     from './components/Knowledge'
-import Contact       from './components/Contact'
-import Footer        from './components/Footer'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import Features from './components/Features'
+import Services from './components/Services'
+import About from './components/About'
+import Resources from './components/Resources'
+import Industries from './components/Industries'
+import Knowledge from './components/Knowledge'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
 import WhatsAppFloat from './components/WhatsAppFloat'
-import EnquiryPopup  from './components/EnquiryPopup'
-import Calculators   from './components/Calculators'
+import EnquiryPopup from './components/EnquiryPopup'
+import Calculators from './components/Calculators'
 import ThemeSwitcher from './components/ThemeSwitcher'
 
 // Auth pages
 import LoginPage from './pages/LoginPage'
-import NotFound  from './pages/NotFound'
+import NotFound from './pages/NotFound'
 
 // Dashboard pages (private)
-import AdminDashboard  from './pages/dashboard/AdminDashboard'
-import StaffDashboard  from './pages/dashboard/StaffDashboard'
+import AdminDashboard from './pages/dashboard/AdminDashboard'
+import StaffDashboard from './pages/dashboard/StaffDashboard'
 import ClientDashboard from './pages/dashboard/ClientDashboard'
 
 // ── Public site layout ────────────────────────────────────────────────────────
@@ -35,6 +38,7 @@ function PublicLayout() {
     <>
       <Navbar />
       <Hero />
+      <Features />
       <Services onSelectService={(srv) => setChosenService(srv)} />
       <Calculators />
       <About />

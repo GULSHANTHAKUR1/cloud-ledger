@@ -12,7 +12,7 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50)
-      const sections = ['services', 'calculators', 'about', 'resources', 'industries', 'knowledge', 'contact']
+      const sections = ['features', 'services', 'calculators', 'about', 'resources', 'industries', 'knowledge', 'contact']
       const current = sections.find(id => {
         const el = document.getElementById(id)
         if (!el) return false
@@ -26,6 +26,7 @@ export default function Navbar() {
   }, [])
 
   const navLinks = [
+    { href: '#features', label: 'Features' },
     { href: '#services', label: 'Services' },
     { href: '#calculators', label: 'Calculators' },
     { href: '#about', label: 'About Us' },
