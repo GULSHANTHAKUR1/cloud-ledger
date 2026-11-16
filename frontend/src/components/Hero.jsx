@@ -28,19 +28,19 @@ export default function Hero() {
       {/* ── HERO ── */}
       <section id="hero" style={{
         minHeight: '100vh',
-        background: 'var(--dark-primary-gradient, linear-gradient(135deg, var(--primary-1, #0A1F44), var(--primary-2, #1DB954), var(--primary-3, #3B82F6), var(--primary-4, #F59E0B)))',
+        background: 'radial-gradient(circle at 50% 20%, rgba(30, 96, 255, 0.12) 0%, #050608 65%, #000000 100%)',
         display: 'flex', alignItems: 'center',
         paddingTop: 80, paddingBottom: 60, position: 'relative', overflow: 'hidden',
       }}>
         {/* Animated Background orbs & Grid */}
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-          <div className="hero-orb hero-orb-1" style={{ position: 'absolute', width: 550, height: 550, borderRadius: '50%', background: 'var(--primary-2, #1DB954)', filter: 'blur(100px)', opacity: 0.12, top: -120, right: -120 }} />
-          <div className="hero-orb hero-orb-2" style={{ position: 'absolute', width: 450, height: 450, borderRadius: '50%', background: 'var(--primary-3, #3B82F6)', filter: 'blur(100px)', opacity: 0.12, bottom: -150, left: -100 }} />
-          <div className="hero-orb hero-orb-3" style={{ position: 'absolute', width: 300, height: 300, borderRadius: '50%', background: 'var(--primary-4, #F59E0B)', filter: 'blur(80px)', opacity: 0.08, top: '40%', left: '40%' }} />
+          <div className="hero-orb hero-orb-1" style={{ position: 'absolute', width: 550, height: 550, borderRadius: '50%', background: '#1e60ff', filter: 'blur(120px)', opacity: 0.12, top: -120, right: -120 }} />
+          <div className="hero-orb hero-orb-2" style={{ position: 'absolute', width: 450, height: 450, borderRadius: '50%', background: '#10b981', filter: 'blur(120px)', opacity: 0.1, bottom: -150, left: -100 }} />
+          <div className="hero-orb hero-orb-3" style={{ position: 'absolute', width: 300, height: 300, borderRadius: '50%', background: '#8b5cf6', filter: 'blur(90px)', opacity: 0.08, top: '40%', left: '40%' }} />
           
           <div style={{
             position: 'absolute', inset: 0,
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
           }} />
         </div>
@@ -52,40 +52,47 @@ export default function Hero() {
             <div>
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
-                background: 'rgba(29,185,84,0.12)', border: '1px solid rgba(29,185,84,0.35)',
-                color: '#25d466', padding: '6px 16px', borderRadius: 100,
-                fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.5px',
-                textTransform: 'uppercase', marginBottom: '1.5rem',
-                boxShadow: '0 0 20px rgba(29,185,84,0.2)'
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
+                color: '#ffffff', padding: '6px 16px', borderRadius: 100,
+                fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.5px',
+                marginBottom: '1.5rem',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.5)'
               }}>
-                <span style={{ width: 7, height: 7, background: 'var(--primary-2, #1DB954)', borderRadius: '50%', animation: 'pulseDot 2s infinite' }} />
-                India's Integrated Business Management Platform
+                <span style={{ width: 7, height: 7, background: '#10b981', borderRadius: '50%', animation: 'pulseDot 2s infinite' }} />
+                AI-First Accounting & Compliance Platform
               </div>
 
               <h1 style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 'clamp(2.5rem, 5vw, 3.8rem)',
                 fontWeight: 800, color: 'white', lineHeight: 1.12, marginBottom: '1.5rem',
+                letterSpacing: '-1px'
               }}>
-                Smart Business<br />
-                Management &<br />
-                <span style={{ color: 'var(--primary-2, #1DB954)', textShadow: '0 0 30px rgba(29,185,84,0.3)' }}>Compliance Hub</span>
+                AI-First Accounting &<br />
+                <span style={{
+                  background: 'linear-gradient(135deg, #38bdf8 0%, #10b981 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  display: 'inline-block'
+                }}>
+                  Smart Compliance
+                </span>
               </h1>
 
-              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.05rem', lineHeight: 1.8, marginBottom: '2.5rem', maxWidth: 540 }}>
-                Cloud Ledger is India's premier digital compliance & business advisory platform. We manage your GST, Income Tax, Company Incorporations, and Statutory Filings with 100% data confidentiality and zero late-fee penalties.
+              <p style={{ color: '#94a3b8', fontSize: '1.05rem', lineHeight: 1.8, marginBottom: '2.5rem', maxWidth: 540 }}>
+                Experience simpler, smarter invoicing, tax compliance, expense management, payroll, and accounting — unified in one automated dashboard with 100% data confidentiality.
               </p>
 
-              {/* CTAs */}
-              <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-                <a href="#services" className="btn btn-green btn-lg">
-                  <i className="fas fa-th-large" /> Explore 315 Services
+              {/* CTAs matching ledgers.cloud */}
+              <div style={{ display: 'flex', gap: '0.9rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+                <a href="#services" className="btn btn-white" style={{ padding: '13px 28px', fontSize: '0.92rem' }}>
+                  Get Started →
                 </a>
-                <a href="#calculators" className="btn" style={{ background: 'rgba(255,255,255,0.09)', color: 'white', border: '1px solid rgba(255,255,255,0.22)' }}>
-                  <i className="fas fa-calculator" style={{ color: '#1DB954' }} /> Tax Calculator
+                <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-blue" style={{ padding: '13px 24px', fontSize: '0.92rem' }}>
+                  Talk to Agent ↗
                 </a>
-                <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-whatsapp btn-lg">
-                  <i className="fab fa-whatsapp" /> WhatsApp
+                <a href="#calculators" className="btn" style={{ background: 'rgba(255,255,255,0.06)', color: 'white', border: '1px solid rgba(255,255,255,0.15)', padding: '13px 20px' }}>
+                  <i className="fas fa-calculator" style={{ color: '#38bdf8' }} /> Tax Calculator
                 </a>
               </div>
 
@@ -99,18 +106,18 @@ export default function Hero() {
                     placeholder="Search services: GST, ITR, Company Registration, Audit..."
                     style={{
                       width: '100%', padding: '16px 60px 16px 20px',
-                      borderRadius: 14, border: '1.5px solid rgba(255,255,255,0.18)',
-                      background: 'rgba(255,255,255,0.08)', color: 'white',
+                      borderRadius: 14, border: '1.5px solid rgba(255,255,255,0.12)',
+                      background: 'rgba(255,255,255,0.05)', color: 'white',
                       fontSize: '0.95rem', backdropFilter: 'blur(10px)', outline: 'none',
                       transition: 'all 0.3s', fontFamily: 'Inter, sans-serif',
-                      boxShadow: '0 8px 32px rgba(0,0,0,0.2)'
+                      boxShadow: '0 8px 32px rgba(0,0,0,0.5)'
                     }}
                   />
                   <button type="submit" style={{
                     position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)',
-                    background: 'linear-gradient(135deg, #1DB954, #17a248)', border: 'none', color: 'white',
+                    background: 'linear-gradient(135deg, #1e60ff, #1952db)', border: 'none', color: 'white',
                     width: 44, height: 44, borderRadius: 10, cursor: 'pointer', fontSize: '1rem',
-                    boxShadow: '0 4px 15px rgba(29,185,84,0.4)'
+                    boxShadow: '0 4px 15px rgba(30,96,255,0.4)'
                   }}>
                     <i className="fas fa-search" />
                   </button>
@@ -119,9 +126,9 @@ export default function Hero() {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
                   {QUICK_TAGS.map(tag => (
                     <button key={tag} type="button" onClick={() => quickSearch(tag)} style={{
-                      background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.7)',
+                      background: 'rgba(255,255,255,0.05)', color: '#94a3b8',
                       padding: '5px 14px', borderRadius: 100, fontSize: '0.78rem', fontWeight: 600,
-                      cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)',
+                      cursor: 'pointer', border: '1px solid rgba(255,255,255,0.08)',
                       transition: 'all 0.2s', fontFamily: 'Inter, sans-serif',
                     }}>{tag}</button>
                   ))}
@@ -135,19 +142,19 @@ export default function Hero() {
               {/* Floating Badge 1 (Top Right) */}
               <div className="floating-badge badge-top-right" style={{
                 position: 'absolute', top: -25, right: -20, zIndex: 4,
-                background: 'var(--card-bg, #ffffff)', borderRadius: 14, padding: '12px 18px',
-                boxShadow: 'var(--card-shadow, 0 20px 40px rgba(0,0,0,0.25))', display: 'flex', alignItems: 'center', gap: 12,
-                border: '1px solid var(--card-border, rgba(255, 255, 255, 0.8))',
+                background: '#111319', borderRadius: 14, padding: '12px 18px',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', gap: 12,
+                border: '1px solid rgba(255, 255, 255, 0.12)',
                 animation: 'floatBadge 4s ease-in-out infinite'
               }}>
-                <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(29, 185, 84, 0.12)', color: 'var(--primary-2, #1DB954)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>
+                <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>
                   🛡️
                 </div>
                 <div>
-                  <div style={{ fontWeight: 800, color: 'var(--primary-1, #0A1F44)', fontSize: '0.85rem', fontFamily: "'Inter', sans-serif" }}>100% Data Confidentiality</div>
+                  <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '0.85rem', fontFamily: "'Inter', sans-serif" }}>100% Data Confidentiality</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--primary-2, #1DB954)', display: 'inline-block', animation: 'pulseDot 2s infinite' }} />
-                    <span style={{ color: 'var(--primary-2, #1DB954)', fontSize: '0.72rem', fontWeight: 600, fontFamily: "'Inter', sans-serif" }}>Bank-Grade 256-Bit Encryption</span>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block', animation: 'pulseDot 2s infinite' }} />
+                    <span style={{ color: '#10b981', fontSize: '0.72rem', fontWeight: 600, fontFamily: "'Inter', sans-serif" }}>Bank-Grade 256-Bit Encryption</span>
                   </div>
                 </div>
               </div>
@@ -155,56 +162,55 @@ export default function Hero() {
               {/* Floating Badge 2 (Bottom Left) */}
               <div className="floating-badge badge-bottom-left" style={{
                 position: 'absolute', bottom: -20, left: -25, zIndex: 4,
-                background: 'var(--card-bg, #ffffff)', borderRadius: 14, padding: '12px 18px',
-                boxShadow: 'var(--card-shadow, 0 20px 40px rgba(0,0,0,0.25))', display: 'flex', alignItems: 'center', gap: 12,
-                border: '1px solid var(--card-border, rgba(255, 255, 255, 0.8))',
+                background: '#111319', borderRadius: 14, padding: '12px 18px',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', gap: 12,
+                border: '1px solid rgba(255, 255, 255, 0.12)',
                 animation: 'floatBadge 4.5s ease-in-out infinite 1.5s'
               }}>
-                <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(245, 158, 11, 0.15)', color: 'var(--primary-4, #F59E0B)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>
+                <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>
                   ⚡
                 </div>
                 <div>
-                  <div style={{ fontWeight: 800, color: 'var(--primary-1, #0A1F44)', fontSize: '0.85rem', fontFamily: "'Inter', sans-serif" }}>Direct CA Consultation</div>
+                  <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '0.85rem', fontFamily: "'Inter', sans-serif" }}>Direct CA Consultation</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--primary-4, #F59E0B)', display: 'inline-block', animation: 'pulseDot 2s infinite' }} />
-                    <span style={{ color: 'var(--gray-500, #64748b)', fontSize: '0.72rem', fontWeight: 600, fontFamily: "'Inter', sans-serif" }}>Dedicated WhatsApp Help Desk</span>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#f59e0b', display: 'inline-block', animation: 'pulseDot 2s infinite' }} />
+                    <span style={{ color: '#94a3b8', fontSize: '0.72rem', fontWeight: 600, fontFamily: "'Inter', sans-serif" }}>Dedicated WhatsApp Help Desk</span>
                   </div>
                 </div>
               </div>
 
               {/* Main Frosted Glass Compliance Standards Card */}
               <div style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
+                background: 'rgba(14, 17, 24, 0.85)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
                 borderRadius: 24, padding: '2rem',
                 backdropFilter: 'blur(20px)',
-                boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
+                boxShadow: '0 30px 60px rgba(0,0,0,0.7)',
                 position: 'relative'
               }}>
                 
                 {/* Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#1DB954', boxShadow: '0 0 10px #1DB954' }} />
-                    <span style={{ color: 'white', fontWeight: 800, fontSize: '0.95rem', letterSpacing: '0.3px' }}>Enterprise Compliance Excellence</span>
+                    <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 10px #10b981' }} />
+                    <span style={{ color: 'white', fontWeight: 800, fontSize: '0.95rem', letterSpacing: '0.3px' }}>Operations & Compliance Engine</span>
                   </div>
-                  <span style={{ background: 'rgba(29,185,84,0.18)', color: '#25d466', padding: '3px 10px', borderRadius: 100, fontSize: '0.72rem', fontWeight: 800 }}>
-                    ● VERIFIED STANDARDS
+                  <span style={{ background: 'rgba(16,185,129,0.15)', color: '#34d399', padding: '3px 10px', borderRadius: 100, fontSize: '0.72rem', fontWeight: 800 }}>
+                    ● LIVE MONITOR
                   </span>
                 </div>
 
                 {/* 4 Stats Grid */}
-                {/* Statistics Grid using StatCard component */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '1.75rem' }}>
                   {[
-                    { target: 315, label: 'Statutory Services', suffix: '+', accentColor: 'var(--primary-2)' , extra: 'Across India'},
-                    { target: 99.8, label: 'On-Time Filing Rate', suffix: '%', accentColor: 'var(--primary-3)' , extra: 'Zero Penalties'},
-                    { target: 256, label: 'Vault Encryption', suffix: '-Bit', accentColor: 'var(--primary-4)' , extra: 'Bank-Grade AES'},
-                    { target: 100, label: 'Expert Oversight', suffix: '%', accentColor: 'var(--primary-1)' , extra: 'Certified CA & CS'}
+                    { target: 315, label: 'Statutory Services', suffix: '+', accentColor: '#10b981' , extra: 'Across India'},
+                    { target: 99.8, label: 'On-Time Filing Rate', suffix: '%', accentColor: '#38bdf8' , extra: 'Zero Penalties'},
+                    { target: 256, label: 'Vault Encryption', suffix: '-Bit', accentColor: '#8b5cf6' , extra: 'Bank-Grade AES'},
+                    { target: 100, label: 'Expert Oversight', suffix: '%', accentColor: '#f59e0b' , extra: 'Certified CA & CS'}
                   ].map((stat, idx) => (
-                    <div key={idx} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '1.1rem' }}>
+                    <div key={idx} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, padding: '1.1rem' }}>
                       <StatCard target={stat.target} label={stat.label} suffix={stat.suffix} accentColor={stat.accentColor} />
-                      {stat.extra && (<div style={{ color: stat.accentColor.replace('var(', '').replace(')', ''), fontSize: '0.72rem', fontWeight: 700, marginTop: 4 }}>{stat.extra}</div>)}
+                      {stat.extra && (<div style={{ color: stat.accentColor, fontSize: '0.72rem', fontWeight: 700, marginTop: 4, textAlign: 'center' }}>{stat.extra}</div>)}
                     </div>
                   ))}
                 </div>
@@ -213,47 +219,47 @@ export default function Hero() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   <div style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                    background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)',
+                    background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)',
                     borderRadius: 12, padding: '10px 14px'
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <span style={{ fontSize: 18 }}>📊</span>
                       <div>
-                        <div style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.82rem', fontWeight: 700 }}>Automated Tax & GST Reconciliation</div>
-                        <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.7rem' }}>Real-time ITC mismatch detection & audit readiness</div>
+                        <div style={{ color: 'rgba(255,255,255,0.95)', fontSize: '0.82rem', fontWeight: 700 }}>Automated Tax & GST Reconciliation</div>
+                        <div style={{ color: '#94a3b8', fontSize: '0.7rem' }}>Real-time ITC mismatch detection & audit readiness</div>
                       </div>
                     </div>
-                    <span style={{ background: 'rgba(29,185,84,0.2)', color: '#4ade80', padding: '2px 8px', borderRadius: 100, fontSize: '0.68rem', fontWeight: 700 }}>Guaranteed</span>
+                    <span style={{ background: 'rgba(16,185,129,0.18)', color: '#34d399', padding: '2px 8px', borderRadius: 100, fontSize: '0.68rem', fontWeight: 700 }}>Auto-Sync</span>
                   </div>
 
                   <div style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                    background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)',
+                    background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)',
                     borderRadius: 12, padding: '10px 14px'
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <span style={{ fontSize: 18 }}>🏛️</span>
                       <div>
-                        <div style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.82rem', fontWeight: 700 }}>Corporate & Startup Incorporation</div>
-                        <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.7rem' }}>SPICe+ MCA approval, DSC, DIN & Incorporation Certificate</div>
+                        <div style={{ color: 'rgba(255,255,255,0.95)', fontSize: '0.82rem', fontWeight: 700 }}>Corporate & Startup Incorporation</div>
+                        <div style={{ color: '#94a3b8', fontSize: '0.7rem' }}>SPICe+ MCA approval, DSC, DIN & Incorporation Certificate</div>
                       </div>
                     </div>
-                    <span style={{ background: 'rgba(56,189,248,0.2)', color: '#38bdf8', padding: '2px 8px', borderRadius: 100, fontSize: '0.68rem', fontWeight: 700 }}>Fast-Track</span>
+                    <span style={{ background: 'rgba(56,189,248,0.18)', color: '#38bdf8', padding: '2px 8px', borderRadius: 100, fontSize: '0.68rem', fontWeight: 700 }}>Fast-Track</span>
                   </div>
 
                   <div style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                    background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)',
+                    background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)',
                     borderRadius: 12, padding: '10px 14px'
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <span style={{ fontSize: 18 }}>🔒</span>
                       <div>
-                        <div style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.82rem', fontWeight: 700 }}>Private Encrypted Client Vault</div>
-                        <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.7rem' }}>Download filed returns, MCA challans & certificates 24/7</div>
+                        <div style={{ color: 'rgba(255,255,255,0.95)', fontSize: '0.82rem', fontWeight: 700 }}>Private Encrypted Client Vault</div>
+                        <div style={{ color: '#94a3b8', fontSize: '0.7rem' }}>Download filed returns, MCA challans & certificates 24/7</div>
                       </div>
                     </div>
-                    <span style={{ background: 'rgba(245,158,11,0.2)', color: '#fbbf24', padding: '2px 8px', borderRadius: 100, fontSize: '0.68rem', fontWeight: 700 }}>AES-256</span>
+                    <span style={{ background: 'rgba(245,158,11,0.18)', color: '#fbbf24', padding: '2px 8px', borderRadius: 100, fontSize: '0.68rem', fontWeight: 700 }}>AES-256</span>
                   </div>
                 </div>
 
@@ -276,14 +282,14 @@ export default function Hero() {
         `}</style>
       </section>
 
-      {/* ── STATS BAR WITH GLOW ── */}
-      <div style={{ background: 'var(--card-bg, #ffffff)', borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '2.5rem 1.5rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+      {/* ── STATS BAR WITH GLOW (Exact match to ledgers.cloud Image 5) ── */}
+      <div style={{ background: '#050608', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '3rem 1.5rem' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2rem', textAlign: 'center' }}>
-            <StatCard target={315} label="Service Target Plan" accentColor="var(--primary-2, #1DB954)" />
-            <StatCard target={15} label="Service Categories" accentColor="var(--primary-3, #3B82F6)" />
-            <StatCard target={500} label="Satisfied Clients" accentColor="var(--primary-2, #1DB954)" />
-            <StatCard target={99} label="Statutory Compliance" suffix="%" accentColor="var(--primary-4, #F59E0B)" />
+            <StatCard target={10000} label="Businesses Served" suffix="+" accentColor="#10b981" />
+            <StatCard target={100} label="GST Filing Accuracy" suffix="%" accentColor="#38bdf8" />
+            <StatCard target={10} label="Faster Reconciliation" suffix="x" accentColor="#8b5cf6" />
+            <StatCard target={15} label="Average Onboarding" suffix=" Min" accentColor="#f59e0b" />
           </div>
         </div>
       </div>

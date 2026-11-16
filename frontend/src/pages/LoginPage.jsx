@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
-import { sendPasswordResetEmail } from 'firebase/auth'
+import { sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../firebase'
 
 const WA_NUMBER = '917827225372'
@@ -15,6 +15,7 @@ export default function LoginPage() {
   const [waReason, setWaReason]     = useState('onboarding')
   const [loading, setLoading]       = useState(false)
   const [showPass, setShowPass]     = useState(false)
+  const [termsAgreed, setTermsAgreed] = useState(true)
 
   const { login, registerClient } = useAuth()
   const navigate = useNavigate()
@@ -22,11 +23,37 @@ export default function LoginPage() {
   const handleLoginChange = e => setLoginForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   const handleRegChange   = e => setRegForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
 
+  // Google Social Sign-In
+  const handleGoogleSignIn = async () => {
+    try {
+      setLoading(true)
+      const provider = new GoogleAuthProvider()
+      const result = await signInWithPopup(auth, provider)
+      toast.success(`Welcome, ${result.user.displayName || result.user.email}!`)
+      navigate('/dashboard/client')
+    } catch (err) {
+      console.warn('Google Auth notice:', err)
+      if (err.code !== 'auth/popup-closed-by-user') {
+        toast.error('Google Sign-In: ' + (err.message || 'Please use email login.'))
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSocialNotice = (provider) => {
+    toast(`Continue with ${provider} is initializing. You can also sign in with email.`, { icon: '🔐' })
+  }
+
   // Unified Smart Login: Automatically routes by role from database
   const handleLogin = async (e) => {
     e.preventDefault()
     if (!loginForm.email || !loginForm.password) {
       toast.error('Please enter your email and password.')
+      return
+    }
+    if (!termsAgreed) {
+      toast.error('Please agree to the Terms of Use & Privacy Policy.')
       return
     }
     setLoading(true)
@@ -61,7 +88,7 @@ export default function LoginPage() {
     }
   }
 
-  // First-Time Client Registration: Instant Client Vault Provisioning
+  // First-Time Client Registration
   const handleRegister = async (e) => {
     e.preventDefault()
     if (!regForm.name || !regForm.email || !regForm.phone || !regForm.password) {
@@ -74,6 +101,10 @@ export default function LoginPage() {
     }
     if (regForm.password !== regForm.confirmPassword) {
       toast.error('Passwords do not match.')
+      return
+    }
+    if (!termsAgreed) {
+      toast.error('Please agree to the Terms of Use & Privacy Policy.')
       return
     }
 
@@ -137,394 +168,466 @@ export default function LoginPage() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'radial-gradient(circle at 10% 10%, #060f22 0%, #0A1F44 60%, #060d1d 100%)',
+      background: 'radial-gradient(circle at 50% 25%, rgba(30, 96, 255, 0.12) 0%, #050608 65%, #000000 100%)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      padding: '2rem 1.5rem', fontFamily: 'Inter, sans-serif'
+      padding: '2.5rem 1.5rem', fontFamily: "'Inter', sans-serif"
     }}>
-      <div style={{ width: '100%', maxWidth: 460 }}>
+      {/* ── Exact Modal Card matching Image 8 ── */}
+      <div style={{
+        width: '100%', maxWidth: 440,
+        background: '#121316',
+        border: '1px solid rgba(255, 255, 255, 0.12)',
+        borderRadius: 24,
+        padding: '2.4rem 2rem',
+        boxShadow: '0 25px 60px rgba(0, 0, 0, 0.8)',
+        position: 'relative'
+      }}>
+        {/* Close Button top-right */}
+        <Link
+          to="/"
+          style={{
+            position: 'absolute', top: 20, right: 22,
+            color: 'rgba(255, 255, 255, 0.5)', textDecoration: 'none',
+            fontSize: '1.25rem', transition: 'color 0.2s', cursor: 'pointer',
+            lineHeight: 1
+          }}
+          onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
+          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.5)'}
+        >
+          ✕
+        </Link>
 
-        {/* Brand Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-            <div style={{
-              width: 44, height: 44, background: 'linear-gradient(135deg, #1DB954, #17a248)',
-              borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 22, boxShadow: '0 4px 20px rgba(29,185,84,0.4)'
-            }}>☁️</div>
-            <span style={{ color: 'white', fontSize: '1.6rem', fontWeight: 800 }}>
-              Cloud<span style={{ color: '#1DB954' }}>Ledger</span>
-            </span>
-          </Link>
-          <div style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: 8 }}>
-            Enterprise Compliance & Private Document Vault
+        {/* Modal Header */}
+        <h2 style={{
+          color: '#ffffff',
+          fontSize: '1.65rem',
+          fontWeight: 700,
+          textAlign: 'center',
+          marginBottom: '1.8rem',
+          letterSpacing: '-0.3px'
+        }}>
+          {activeTab === 'register' ? 'Create your account' : activeTab === 'whatsapp' ? 'Support & Access' : 'Log in or sign up'}
+        </h2>
+
+        {/* Social Buttons (Image 8) */}
+        {activeTab !== 'whatsapp' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: '1.5rem' }}>
+            {/* Google */}
+            <button
+              type="button"
+              onClick={handleGoogleSignIn}
+              style={{
+                width: '100%', height: 48,
+                background: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: 12, color: '#ffffff',
+                fontWeight: 600, fontSize: '0.92rem',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
+                cursor: 'pointer', transition: 'all 0.2s'
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)'}
+            >
+              <svg width="20" height="20" viewBox="0 0 48 48">
+                <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+              </svg>
+              Continue with Google
+            </button>
+
+            {/* Apple */}
+            <button
+              type="button"
+              onClick={() => handleSocialNotice('Apple')}
+              style={{
+                width: '100%', height: 48,
+                background: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: 12, color: '#ffffff',
+                fontWeight: 600, fontSize: '0.92rem',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
+                cursor: 'pointer', transition: 'all 0.2s'
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)'}
+            >
+              <i className="fab fa-apple" style={{ fontSize: '1.25rem' }} />
+              Continue with Apple
+            </button>
+
+            {/* Facebook */}
+            <button
+              type="button"
+              onClick={() => handleSocialNotice('Facebook')}
+              style={{
+                width: '100%', height: 48,
+                background: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: 12, color: '#ffffff',
+                fontWeight: 600, fontSize: '0.92rem',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
+                cursor: 'pointer', transition: 'all 0.2s'
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)'}
+            >
+              <i className="fab fa-facebook" style={{ color: '#1877f2', fontSize: '1.25rem' }} />
+              Continue with Facebook
+            </button>
           </div>
-        </div>
+        )}
 
-        {/* Portal Access Mode Tabs */}
-        <div style={{
-          display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
-          background: 'rgba(255,255,255,0.06)', borderRadius: 12,
-          padding: 4, marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.1)'
-        }}>
-          <button
-            onClick={() => setActiveTab('login')}
-            style={{
-              padding: '10px 4px', border: 'none', borderRadius: 9, cursor: 'pointer',
-              fontWeight: 700, fontSize: '0.78rem', transition: 'all 0.2s',
-              background: activeTab === 'login' ? '#1DB954' : 'transparent',
-              color: activeTab === 'login' ? 'white' : 'rgba(255,255,255,0.6)',
-              boxShadow: activeTab === 'login' ? '0 2px 10px rgba(29,185,84,0.3)' : 'none',
-              textAlign: 'center'
-            }}
-          >
-            <i className="fas fa-sign-in-alt" style={{ marginRight: 5 }} /> Sign In
-          </button>
-          <button
-            onClick={() => setActiveTab('register')}
-            style={{
-              padding: '10px 4px', border: 'none', borderRadius: 9, cursor: 'pointer',
-              fontWeight: 700, fontSize: '0.78rem', transition: 'all 0.2s',
-              background: activeTab === 'register' ? '#1DB954' : 'transparent',
-              color: activeTab === 'register' ? 'white' : 'rgba(255,255,255,0.6)',
-              boxShadow: activeTab === 'register' ? '0 2px 10px rgba(29,185,84,0.3)' : 'none',
-              textAlign: 'center'
-            }}
-          >
-            <i className="fas fa-user-plus" style={{ marginRight: 5 }} /> New Client
-          </button>
-          <button
-            onClick={() => setActiveTab('whatsapp')}
-            style={{
-              padding: '10px 4px', border: 'none', borderRadius: 9, cursor: 'pointer',
-              fontWeight: 700, fontSize: '0.78rem', transition: 'all 0.2s',
-              background: activeTab === 'whatsapp' ? '#25d466' : 'transparent',
-              color: activeTab === 'whatsapp' ? 'white' : 'rgba(255,255,255,0.6)',
-              boxShadow: activeTab === 'whatsapp' ? '0 2px 10px rgba(37,212,102,0.3)' : 'none',
-              textAlign: 'center'
-            }}
-          >
-            <i className="fab fa-whatsapp" style={{ marginRight: 5 }} /> WA Help
-          </button>
-        </div>
+        {/* OR Divider (Image 8) */}
+        {activeTab !== 'whatsapp' && (
+          <div style={{ display: 'flex', alignItems: 'center', margin: '1.6rem 0', gap: 14 }}>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255, 255, 255, 0.1)' }} />
+            <span style={{ color: '#71717a', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.5px' }}>OR</span>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255, 255, 255, 0.1)' }} />
+          </div>
+        )}
 
-        {/* Card Body */}
-        <div style={{
-          background: 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          backdropFilter: 'blur(16px)',
-          borderRadius: 20,
-          padding: '2.2rem',
-          boxShadow: '0 20px 40px rgba(0,0,0,0.4)'
-        }}>
-
-          {/* ════ TAB 1: SIGN IN ════ */}
-          {activeTab === 'login' && (
-            <form onSubmit={handleLogin}>
-              <div style={{ marginBottom: '1.2rem' }}>
-                <label style={{ display: 'block', color: 'rgba(255,255,255,0.85)', fontSize: '0.82rem', fontWeight: 600, marginBottom: 7 }}>
-                  Email Address
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <i className="fas fa-envelope" style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#64748b', fontSize: '0.9rem' }} />
-                  <input
-                    type="email"
-                    name="email"
-                    value={loginForm.email}
-                    onChange={handleLoginChange}
-                    placeholder="name@company.com"
-                    required
-                    style={{
-                      width: '100%', padding: '12px 14px 12px 40px',
-                      background: 'rgba(255,255,255,0.07)', border: '1.5px solid rgba(255,255,255,0.12)',
-                      borderRadius: 10, color: 'white', fontSize: '0.9rem', outline: 'none'
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div style={{ marginBottom: '1.2rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 7 }}>
-                  <label style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.82rem', fontWeight: 600 }}>
-                    Password
-                  </label>
-                  <button type="button" onClick={handleForgotPass}
-                    style={{ background: 'none', border: 'none', color: '#1DB954', fontSize: '0.78rem', cursor: 'pointer', fontWeight: 600 }}>
-                    Forgot?
-                  </button>
-                </div>
-                <div style={{ position: 'relative' }}>
-                  <i className="fas fa-lock" style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#64748b', fontSize: '0.9rem' }} />
-                  <input
-                    type={showPass ? 'text' : 'password'}
-                    name="password"
-                    value={loginForm.password}
-                    onChange={handleLoginChange}
-                    placeholder="Enter your password"
-                    required
-                    style={{
-                      width: '100%', padding: '12px 42px 12px 40px',
-                      background: 'rgba(255,255,255,0.07)', border: '1.5px solid rgba(255,255,255,0.12)',
-                      borderRadius: 10, color: 'white', fontSize: '0.9rem', outline: 'none'
-                    }}
-                  />
-                  <button type="button" onClick={() => setShowPass(!showPass)}
-                    style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '0.85rem' }}>
-                    <i className={`fas ${showPass ? 'fa-eye-slash' : 'fa-eye'}`} />
-                  </button>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                style={{
-                  width: '100%', padding: '13px',
-                  background: 'linear-gradient(135deg, #1DB954, #17a248)',
-                  border: 'none', borderRadius: 10, color: 'white',
-                  fontWeight: 700, fontSize: '0.95rem', cursor: loading ? 'not-allowed' : 'pointer',
-                  opacity: loading ? 0.7 : 1, transition: 'all 0.2s',
-                  boxShadow: '0 4px 18px rgba(29,185,84,0.4)', marginTop: 4
-                }}
-              >
-                {loading ? <i className="fas fa-spinner fa-spin" /> : <><i className="fas fa-lock" style={{ marginRight: 8 }} /> Secure Sign In</>}
-              </button>
-
-              <div style={{
-                marginTop: '1.4rem', padding: '12px 14px', borderRadius: 10,
-                background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.8rem', color: '#94a3b8'
-              }}>
-                <span>Visiting for the first time?</span>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('register')}
-                  style={{ background: 'none', border: 'none', color: '#25d466', fontWeight: 700, cursor: 'pointer', fontSize: '0.8rem' }}
-                >
-                  Create Client Account →
-                </button>
-              </div>
-            </form>
-          )}
-
-          {/* ════ TAB 2: FIRST-TIME CLIENT REGISTRATION ════ */}
-          {activeTab === 'register' && (
-            <form onSubmit={handleRegister}>
-              <div style={{
-                padding: '10px 14px', borderRadius: 10, marginBottom: '1.2rem',
-                background: 'rgba(29,185,84,0.1)', border: '1px solid rgba(29,185,84,0.25)',
-                color: '#25d466', fontSize: '0.78rem', lineHeight: 1.5
-              }}>
-                <i className="fas fa-shield-alt" style={{ marginRight: 6 }} />
-                <strong>First-time client?</strong> Register to instantly generate your 256-bit encrypted document vault and compliance tracker.
-              </div>
-
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{ display: 'block', color: 'rgba(255,255,255,0.85)', fontSize: '0.8rem', fontWeight: 600, marginBottom: 5 }}>
-                  Full Name / Business Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={regForm.name}
-                  onChange={handleRegChange}
-                  placeholder="e.g. Rahul Sharma / ABC Traders"
-                  required
-                  style={{
-                    width: '100%', padding: '10px 14px',
-                    background: 'rgba(255,255,255,0.07)', border: '1.5px solid rgba(255,255,255,0.12)',
-                    borderRadius: 10, color: 'white', fontSize: '0.88rem', outline: 'none'
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{ display: 'block', color: 'rgba(255,255,255,0.85)', fontSize: '0.8rem', fontWeight: 600, marginBottom: 5 }}>
-                  Email Address
-                </label>
+        {/* ════ TAB 1: SIGN IN ════ */}
+        {activeTab === 'login' && (
+          <form onSubmit={handleLogin}>
+            {/* Email Field with Glowing Blue Border on focus */}
+            <div style={{ marginBottom: '1.2rem' }}>
+              <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.8rem', fontWeight: 500, marginBottom: 7 }}>
+                Email
+              </label>
+              <div style={{ position: 'relative' }}>
+                <i className="far fa-envelope" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: '#64748b', fontSize: '0.95rem' }} />
                 <input
                   type="email"
                   name="email"
-                  value={regForm.email}
-                  onChange={handleRegChange}
-                  placeholder="name@domain.com"
+                  value={loginForm.email}
+                  onChange={handleLoginChange}
+                  placeholder="name@example.com"
                   required
                   style={{
-                    width: '100%', padding: '10px 14px',
-                    background: 'rgba(255,255,255,0.07)', border: '1.5px solid rgba(255,255,255,0.12)',
-                    borderRadius: 10, color: 'white', fontSize: '0.88rem', outline: 'none'
+                    width: '100%', height: 48, padding: '0 16px 0 46px',
+                    background: '#090a0d', border: '1.5px solid #2563eb',
+                    borderRadius: 12, color: 'white', fontSize: '0.92rem', outline: 'none',
+                    boxShadow: '0 0 15px rgba(37, 99, 235, 0.2)', transition: 'border-color 0.2s'
                   }}
                 />
               </div>
+            </div>
 
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{ display: 'block', color: 'rgba(255,255,255,0.85)', fontSize: '0.8rem', fontWeight: 600, marginBottom: 5 }}>
-                  WhatsApp / Mobile Number
+            {/* Password Field */}
+            <div style={{ marginBottom: '1.4rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 7 }}>
+                <label style={{ color: '#94a3b8', fontSize: '0.8rem', fontWeight: 500 }}>
+                  Password
                 </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={regForm.phone}
-                  onChange={handleRegChange}
-                  placeholder="10-digit mobile number"
-                  required
-                  style={{
-                    width: '100%', padding: '10px 14px',
-                    background: 'rgba(255,255,255,0.07)', border: '1.5px solid rgba(255,255,255,0.12)',
-                    borderRadius: 10, color: 'white', fontSize: '0.88rem', outline: 'none'
-                  }}
-                />
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.2rem' }}>
-                <div>
-                  <label style={{ display: 'block', color: 'rgba(255,255,255,0.85)', fontSize: '0.8rem', fontWeight: 600, marginBottom: 5 }}>
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={regForm.password}
-                    onChange={handleRegChange}
-                    placeholder="Min 6 chars"
-                    required
-                    style={{
-                      width: '100%', padding: '10px 12px',
-                      background: 'rgba(255,255,255,0.07)', border: '1.5px solid rgba(255,255,255,0.12)',
-                      borderRadius: 10, color: 'white', fontSize: '0.88rem', outline: 'none'
-                    }}
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', color: 'rgba(255,255,255,0.85)', fontSize: '0.8rem', fontWeight: 600, marginBottom: 5 }}>
-                    Confirm
-                  </label>
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    value={regForm.confirmPassword}
-                    onChange={handleRegChange}
-                    placeholder="Re-enter"
-                    required
-                    style={{
-                      width: '100%', padding: '10px 12px',
-                      background: 'rgba(255,255,255,0.07)', border: '1.5px solid rgba(255,255,255,0.12)',
-                      borderRadius: 10, color: 'white', fontSize: '0.88rem', outline: 'none'
-                    }}
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                style={{
-                  width: '100%', padding: '13px',
-                  background: 'linear-gradient(135deg, #1DB954, #17a248)',
-                  border: 'none', borderRadius: 10, color: 'white',
-                  fontWeight: 700, fontSize: '0.95rem', cursor: loading ? 'not-allowed' : 'pointer',
-                  opacity: loading ? 0.7 : 1, transition: 'all 0.2s',
-                  boxShadow: '0 4px 18px rgba(29,185,84,0.4)'
-                }}
-              >
-                {loading ? <i className="fas fa-spinner fa-spin" /> : <><i className="fas fa-check-circle" style={{ marginRight: 8 }} /> Create My Vault Account</>}
-              </button>
-
-              <div style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.8rem', color: '#94a3b8' }}>
-                Already registered?{' '}
                 <button
                   type="button"
-                  onClick={() => setActiveTab('login')}
-                  style={{ background: 'none', border: 'none', color: '#1DB954', fontWeight: 700, cursor: 'pointer' }}
+                  onClick={handleForgotPass}
+                  style={{ background: 'none', border: 'none', color: '#1e60ff', fontSize: '0.78rem', cursor: 'pointer', fontWeight: 500 }}
                 >
-                  Sign in here
+                  Forgot password?
                 </button>
               </div>
-            </form>
-          )}
-
-          {/* ════ TAB 3: WHATSAPP INSTANT ASSISTANCE ════ */}
-          {activeTab === 'whatsapp' && (
-            <form onSubmit={handleWhatsAppSupport}>
-              <div style={{
-                padding: '12px', borderRadius: 10, marginBottom: '1.2rem',
-                background: 'rgba(37,212,102,0.1)', border: '1px solid rgba(37,212,102,0.25)',
-                color: '#25d466', fontSize: '0.8rem', lineHeight: 1.5
-              }}>
-                <i className="fab fa-whatsapp" style={{ marginRight: 6, fontSize: '1rem' }} />
-                <strong>Direct Desk Support (+91 78272 25372)</strong><br />
-                Our administration desk will instantly verify your number and dispatch your portal login credentials.
-              </div>
-
-              <div style={{ marginBottom: '1.2rem' }}>
-                <label style={{ display: 'block', color: 'rgba(255,255,255,0.85)', fontSize: '0.82rem', fontWeight: 600, marginBottom: 7 }}>
-                  Your Mobile Number
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <i className="fas fa-phone" style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#64748b', fontSize: '0.9rem' }} />
-                  <input
-                    type="tel"
-                    value={waPhone}
-                    onChange={e => setWaPhone(e.target.value)}
-                    placeholder="e.g. 9876543210"
-                    required
-                    style={{
-                      width: '100%', padding: '12px 14px 12px 40px',
-                      background: 'rgba(255,255,255,0.07)', border: '1.5px solid rgba(255,255,255,0.12)',
-                      borderRadius: 10, color: 'white', fontSize: '0.9rem', outline: 'none'
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div style={{ marginBottom: '1.4rem' }}>
-                <label style={{ display: 'block', color: 'rgba(255,255,255,0.85)', fontSize: '0.82rem', fontWeight: 600, marginBottom: 7 }}>
-                  What do you need help with?
-                </label>
-                <select
-                  value={waReason}
-                  onChange={e => setWaReason(e.target.value)}
+              <div style={{ position: 'relative' }}>
+                <i className="fas fa-lock" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: '#64748b', fontSize: '0.9rem' }} />
+                <input
+                  type={showPass ? 'text' : 'password'}
+                  name="password"
+                  value={loginForm.password}
+                  onChange={handleLoginChange}
+                  placeholder="Enter your password"
+                  required
                   style={{
-                    width: '100%', padding: '12px 14px',
-                    background: '#0a1f44', border: '1.5px solid rgba(255,255,255,0.15)',
-                    borderRadius: 10, color: 'white', fontSize: '0.88rem', outline: 'none'
+                    width: '100%', height: 48, padding: '0 46px 0 46px',
+                    background: '#090a0d', border: '1px solid rgba(255, 255, 255, 0.14)',
+                    borderRadius: 12, color: 'white', fontSize: '0.92rem', outline: 'none',
+                    transition: 'border-color 0.2s'
                   }}
+                  onFocus={e => e.target.style.borderColor = '#2563eb'}
+                  onBlur={e => e.target.style.borderColor = 'rgba(255, 255, 255, 0.14)'}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPass(!showPass)}
+                  style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '0.9rem' }}
                 >
-                  <option value="onboarding">I am a first-time client (New Account Activation)</option>
-                  <option value="credentials">I need my existing login credentials</option>
-                  <option value="reset">I forgot my password</option>
-                </select>
+                  <i className={`fas ${showPass ? 'fa-eye-slash' : 'fa-eye'}`} />
+                </button>
               </div>
+            </div>
 
+            {/* Big White Continue Button (Image 8) */}
+            <button
+              type="submit"
+              disabled={loading}
+              style={{
+                width: '100%', height: 48,
+                background: '#ffffff', color: '#000000',
+                borderRadius: 9999, border: 'none',
+                fontWeight: 700, fontSize: '0.95rem', cursor: loading ? 'not-allowed' : 'pointer',
+                opacity: loading ? 0.7 : 1, transition: 'all 0.2s',
+                boxShadow: '0 4px 15px rgba(255, 255, 255, 0.25)'
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = '#f1f5f9'}
+              onMouseLeave={e => e.currentTarget.style.background = '#ffffff'}
+            >
+              {loading ? <i className="fas fa-spinner fa-spin" /> : 'Continue'}
+            </button>
+
+            {/* Terms of Use Checkbox (Image 8) */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: '1.2rem' }}>
+              <input
+                type="checkbox"
+                id="login-terms"
+                checked={termsAgreed}
+                onChange={e => setTermsAgreed(e.target.checked)}
+                style={{ accentColor: '#ffffff', width: 15, height: 15, cursor: 'pointer' }}
+              />
+              <label htmlFor="login-terms" style={{ color: '#94a3b8', fontSize: '0.78rem', cursor: 'pointer' }}>
+                I agree to the <span style={{ color: '#ffffff', textDecoration: 'underline' }}>Terms of Use</span> & <span style={{ color: '#ffffff', textDecoration: 'underline' }}>Privacy Policy</span>
+              </label>
+            </div>
+
+            {/* Links for New Users / WhatsApp */}
+            <div style={{ marginTop: '1.8rem', paddingTop: '1.2rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem' }}>
+              <span style={{ color: '#71717a' }}>First time visiting?</span>
               <button
-                type="submit"
+                type="button"
+                onClick={() => setActiveTab('register')}
+                style={{ background: 'none', border: 'none', color: '#10b981', fontWeight: 600, cursor: 'pointer', fontSize: '0.8rem' }}
+              >
+                Sign up here →
+              </button>
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 12 }}>
+              <button
+                type="button"
+                onClick={() => setActiveTab('whatsapp')}
+                style={{ background: 'none', border: 'none', color: '#64748b', fontSize: '0.76rem', cursor: 'pointer' }}
+              >
+                Need assistance? Open WhatsApp Help
+              </button>
+            </div>
+          </form>
+        )}
+
+        {/* ════ TAB 2: SIGN UP / REGISTRATION ════ */}
+        {activeTab === 'register' && (
+          <form onSubmit={handleRegister}>
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.8rem', fontWeight: 500, marginBottom: 5 }}>
+                Full Name / Business Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={regForm.name}
+                onChange={handleRegChange}
+                placeholder="Rahul Sharma / ABC Traders"
+                required
                 style={{
-                  width: '100%', padding: '13px',
-                  background: 'linear-gradient(135deg, #25d466, #128c7e)',
-                  border: 'none', borderRadius: 10, color: 'white',
-                  fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
-                  boxShadow: '0 4px 18px rgba(37,212,102,0.4)', transition: 'all 0.2s'
+                  width: '100%', height: 46, padding: '0 14px',
+                  background: '#090a0d', border: '1px solid rgba(255, 255, 255, 0.14)',
+                  borderRadius: 12, color: 'white', fontSize: '0.9rem', outline: 'none'
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.8rem', fontWeight: 500, marginBottom: 5 }}>
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={regForm.email}
+                onChange={handleRegChange}
+                placeholder="name@example.com"
+                required
+                style={{
+                  width: '100%', height: 46, padding: '0 14px',
+                  background: '#090a0d', border: '1.5px solid #2563eb',
+                  borderRadius: 12, color: 'white', fontSize: '0.9rem', outline: 'none'
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.8rem', fontWeight: 500, marginBottom: 5 }}>
+                WhatsApp / Mobile Number
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                value={regForm.phone}
+                onChange={handleRegChange}
+                placeholder="10-digit mobile number"
+                required
+                style={{
+                  width: '100%', height: 46, padding: '0 14px',
+                  background: '#090a0d', border: '1px solid rgba(255, 255, 255, 0.14)',
+                  borderRadius: 12, color: 'white', fontSize: '0.9rem', outline: 'none'
+                }}
+              />
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.2rem' }}>
+              <div>
+                <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.8rem', fontWeight: 500, marginBottom: 5 }}>
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={regForm.password}
+                  onChange={handleRegChange}
+                  placeholder="Min 6 chars"
+                  required
+                  style={{
+                    width: '100%', height: 46, padding: '0 12px',
+                    background: '#090a0d', border: '1px solid rgba(255, 255, 255, 0.14)',
+                    borderRadius: 12, color: 'white', fontSize: '0.88rem', outline: 'none'
+                  }}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.8rem', fontWeight: 500, marginBottom: 5 }}>
+                  Confirm
+                </label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={regForm.confirmPassword}
+                  onChange={handleRegChange}
+                  placeholder="Re-enter"
+                  required
+                  style={{
+                    width: '100%', height: 46, padding: '0 12px',
+                    background: '#090a0d', border: '1px solid rgba(255, 255, 255, 0.14)',
+                    borderRadius: 12, color: 'white', fontSize: '0.88rem', outline: 'none'
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* White Continue Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              style={{
+                width: '100%', height: 48,
+                background: '#ffffff', color: '#000000',
+                borderRadius: 9999, border: 'none',
+                fontWeight: 700, fontSize: '0.95rem', cursor: loading ? 'not-allowed' : 'pointer',
+                opacity: loading ? 0.7 : 1, transition: 'all 0.2s',
+                boxShadow: '0 4px 15px rgba(255, 255, 255, 0.25)'
+              }}
+            >
+              {loading ? <i className="fas fa-spinner fa-spin" /> : 'Create Account'}
+            </button>
+
+            {/* Terms */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: '1.2rem' }}>
+              <input
+                type="checkbox"
+                id="reg-terms"
+                checked={termsAgreed}
+                onChange={e => setTermsAgreed(e.target.checked)}
+                style={{ accentColor: '#ffffff', width: 15, height: 15, cursor: 'pointer' }}
+              />
+              <label htmlFor="reg-terms" style={{ color: '#94a3b8', fontSize: '0.78rem', cursor: 'pointer' }}>
+                I agree to the <span style={{ color: '#ffffff', textDecoration: 'underline' }}>Terms of Use</span> & <span style={{ color: '#ffffff', textDecoration: 'underline' }}>Privacy Policy</span>
+              </label>
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: '1.4rem', fontSize: '0.8rem', color: '#71717a' }}>
+              Already registered?{' '}
+              <button
+                type="button"
+                onClick={() => setActiveTab('login')}
+                style={{ background: 'none', border: 'none', color: '#10b981', fontWeight: 600, cursor: 'pointer' }}
+              >
+                Log in here
+              </button>
+            </div>
+          </form>
+        )}
+
+        {/* ════ TAB 3: WHATSAPP ACCESS ASSISTANCE ════ */}
+        {activeTab === 'whatsapp' && (
+          <form onSubmit={handleWhatsAppSupport}>
+            <div style={{
+              padding: '14px', borderRadius: 14, marginBottom: '1.4rem',
+              background: 'rgba(37, 212, 102, 0.08)', border: '1px solid rgba(37, 212, 102, 0.25)',
+              color: '#34d399', fontSize: '0.82rem', lineHeight: 1.6
+            }}>
+              <i className="fab fa-whatsapp" style={{ marginRight: 8, fontSize: '1rem' }} />
+              Direct support for password resets, first-time credentials, and dashboard onboarding.
+            </div>
+
+            <div style={{ marginBottom: '1.2rem' }}>
+              <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.8rem', fontWeight: 500, marginBottom: 7 }}>
+                Registered Mobile Number
+              </label>
+              <input
+                type="tel"
+                value={waPhone}
+                onChange={e => setWaPhone(e.target.value)}
+                placeholder="Enter 10-digit mobile number"
+                required
+                style={{
+                  width: '100%', height: 48, padding: '0 16px',
+                  background: '#090a0d', border: '1px solid rgba(255, 255, 255, 0.14)',
+                  borderRadius: 12, color: 'white', fontSize: '0.92rem', outline: 'none'
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: '1.5rem' }}>
+              <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.8rem', fontWeight: 500, marginBottom: 7 }}>
+                Assistance Required
+              </label>
+              <select
+                value={waReason}
+                onChange={e => setWaReason(e.target.value)}
+                style={{
+                  width: '100%', height: 48, padding: '0 16px',
+                  background: '#090a0d', border: '1px solid rgba(255, 255, 255, 0.14)',
+                  borderRadius: 12, color: 'white', fontSize: '0.88rem', outline: 'none'
                 }}
               >
-                <i className="fab fa-whatsapp" style={{ marginRight: 8, fontSize: '1.1rem' }} />
-                Request Credentials on WhatsApp
+                <option value="onboarding" style={{ background: '#121316', color: 'white' }}>First-time portal access</option>
+                <option value="reset" style={{ background: '#121316', color: 'white' }}>Password reset help</option>
+                <option value="credentials" style={{ background: '#121316', color: 'white' }}>Retrieve login credentials</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              style={{
+                width: '100%', height: 48,
+                background: '#25d466', color: '#ffffff',
+                borderRadius: 9999, border: 'none',
+                fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                boxShadow: '0 4px 18px rgba(37, 212, 102, 0.3)'
+              }}
+            >
+              <i className="fab fa-whatsapp" style={{ fontSize: '1.1rem' }} /> Open WhatsApp Support
+            </button>
+
+            <div style={{ textAlign: 'center', marginTop: '1.4rem' }}>
+              <button
+                type="button"
+                onClick={() => setActiveTab('login')}
+                style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '0.8rem', cursor: 'pointer' }}
+              >
+                ← Back to standard login
               </button>
-            </form>
-          )}
-
-        </div>
-
-        {/* Security Badge */}
-        <div style={{ textAlign: 'center', marginTop: '1.5rem', color: '#64748b', fontSize: '0.78rem' }}>
-          <i className="fas fa-lock" style={{ marginRight: 6 }} />
-          All portal connections are protected by 256-bit SSL and role-enforced access.
-        </div>
-
-        {/* Back to Home */}
-        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-          <Link to="/" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: '0.82rem' }}>
-            ← Back to Cloud Ledger Home
-          </Link>
-        </div>
+            </div>
+          </form>
+        )}
 
       </div>
     </div>

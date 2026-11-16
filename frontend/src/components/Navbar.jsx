@@ -39,51 +39,54 @@ export default function Navbar() {
   return (
     <nav style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-      background: scrolled ? 'rgba(6,15,34,0.98)' : 'rgba(10,31,68,0.97)',
+      background: scrolled ? 'rgba(0, 0, 0, 0.95)' : 'rgba(0, 0, 0, 0.82)',
       backdropFilter: 'blur(20px)',
-      borderBottom: '1px solid rgba(255,255,255,0.08)',
+      borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
       padding: '0 2rem',
-      height: scrolled ? '62px' : '72px',
+      height: scrolled ? '64px' : '72px',
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       transition: 'all 0.3s ease',
-      boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.3)' : 'none',
+      boxShadow: scrolled ? '0 10px 30px rgba(0, 0, 0, 0.8)' : 'none',
     }}>
-      {/* Logo */}
-      <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+      {/* Brand Logo with 4 geometric diamond tiles */}
+      <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
         <div style={{
-          width: 38, height: 38, background: 'linear-gradient(135deg,#1DB954,#17a248)',
-          borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 18, boxShadow: '0 4px 15px rgba(29,185,84,0.4)'
-        }}>☁️</div>
-        <span style={{ color: 'white', fontSize: '1.25rem', fontWeight: 800 }}>
-          Cloud<span style={{ color: '#1DB954' }}>Ledger</span>
+          display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 3, width: 22, height: 22, transform: 'rotate(45deg)'
+        }}>
+          <div style={{ width: 9, height: 9, borderRadius: 2, background: '#ef4444' }} />
+          <div style={{ width: 9, height: 9, borderRadius: 2, background: '#f59e0b' }} />
+          <div style={{ width: 9, height: 9, borderRadius: 2, background: '#10b981' }} />
+          <div style={{ width: 9, height: 9, borderRadius: 2, background: '#1e60ff' }} />
+        </div>
+        <span style={{ color: '#ffffff', fontSize: '1.3rem', fontWeight: 800, letterSpacing: '-0.3px', fontFamily: "'Inter', sans-serif" }}>
+          CLOUD<span style={{ color: '#ffffff', fontWeight: 500 }}>LEDGER</span>
         </span>
       </a>
 
       {/* Desktop nav */}
-      <ul style={{ display: 'flex', gap: '0.2rem', listStyle: 'none', alignItems: 'center', margin: 0, padding: 0 }}
+      <ul style={{ display: 'flex', gap: '0.4rem', listStyle: 'none', alignItems: 'center', margin: 0, padding: 0 }}
           className="desktop-nav">
         {navLinks.map(link => (
           <li key={link.href}>
             <a href={link.href} style={{
-              color: activeSection === link.href.slice(1) ? '#25d466' : 'rgba(255,255,255,0.8)',
-              textDecoration: 'none', fontSize: '0.86rem', fontWeight: 600,
-              padding: '8px 14px', borderRadius: 8,
-              background: activeSection === link.href.slice(1) ? 'rgba(29,185,84,0.1)' : 'transparent',
+              color: activeSection === link.href.slice(1) ? '#ffffff' : 'rgba(255,255,255,0.7)',
+              textDecoration: 'none', fontSize: '0.86rem', fontWeight: 500,
+              padding: '6px 14px', borderRadius: 8,
+              background: activeSection === link.href.slice(1) ? 'rgba(255,255,255,0.08)' : 'transparent',
               transition: 'all 0.2s',
             }}>{link.label}</a>
           </li>
         ))}
       </ul>
 
-      {/* CTA */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-whatsapp"
-           style={{ padding: '8px 16px', fontSize: '0.82rem' }}>
-          <i className="fab fa-whatsapp" /> WhatsApp
+      {/* CTA Buttons */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-blue"
+           style={{ padding: '8px 20px', borderRadius: 9999, fontSize: '0.84rem' }}>
+          Talk to Agent ↗
         </a>
-        <Link to="/login" className="btn btn-green" style={{ padding: '8px 18px', fontSize: '0.82rem' }}>
-          <i className="fas fa-sign-in-alt" /> Portal Login
+        <Link to="/login" className="btn btn-navy" style={{ padding: '8px 20px', borderRadius: 9999, fontSize: '0.84rem' }}>
+          Login
         </Link>
         <button onClick={() => setMobileOpen(!mobileOpen)}
           style={{ display: 'none', background: 'none', border: 'none', color: 'white', fontSize: '1.3rem', cursor: 'pointer', padding: 6 }}
@@ -96,8 +99,8 @@ export default function Navbar() {
       {mobileOpen && (
         <div style={{
           position: 'absolute', top: '100%', left: 0, right: 0,
-          background: 'rgba(6,15,34,0.98)', backdropFilter: 'blur(20px)',
-          padding: '1.2rem 2rem', display: 'flex', flexDirection: 'column', gap: 8,
+          background: 'rgba(5, 6, 8, 0.98)', backdropFilter: 'blur(20px)',
+          padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: 10,
           borderBottom: '1px solid rgba(255,255,255,0.1)'
         }}>
           {navLinks.map(link => (
@@ -108,11 +111,11 @@ export default function Navbar() {
             </a>
           ))}
           <div style={{ display: 'flex', gap: 10, marginTop: 10 }}>
-            <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-whatsapp" style={{ flex: 1, justifyContent: 'center' }}>
-              <i className="fab fa-whatsapp" /> WhatsApp
+            <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-blue" style={{ flex: 1, justifyContent: 'center' }}>
+              Talk to Agent ↗
             </a>
-            <Link to="/login" onClick={() => setMobileOpen(false)} className="btn btn-green" style={{ flex: 1, justifyContent: 'center' }}>
-              <i className="fas fa-sign-in-alt" /> Login
+            <Link to="/login" onClick={() => setMobileOpen(false)} className="btn btn-navy" style={{ flex: 1, justifyContent: 'center' }}>
+              Login
             </Link>
           </div>
         </div>
