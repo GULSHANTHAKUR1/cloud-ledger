@@ -103,21 +103,29 @@ export default function Resources() {
   const [selectedRes, setSelectedRes] = useState(null)
 
   return (
-    <section id="resources" style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
+    <section id="resources" style={{ background: '#050608', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '5rem 0' }}>
       <div className="container">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem', marginBottom: '3rem' }}>
           <div>
-            <div className="section-badge">
+            <div className="section-badge" style={{ background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.25)', color: '#38bdf8' }}>
               <i className="fas fa-download" /> Resources & Downloads
             </div>
-            <h2 className="section-title">
-              Statutory Checklists &<br /><span className="accent">Compliance Guides</span>
+            <h2 className="section-title" style={{ color: '#ffffff' }}>
+              Statutory Checklists &<br />
+              <span style={{
+                background: 'linear-gradient(135deg, #38bdf8 0%, #10b981 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
+              }}>
+                Compliance Guides
+              </span>
             </h2>
-            <p className="section-desc">
+            <p className="section-desc" style={{ color: '#94a3b8' }}>
               Free, ready-to-use regulatory checklists and documentation kits to help your business stay audit-ready and compliant.
             </p>
           </div>
-          <a href="#contact" className="btn btn-outline">
+          <a href="#contact" className="btn btn-white" style={{ padding: '10px 20px', fontSize: '0.86rem' }}>
             <i className="fas fa-question-circle" /> Need Custom Documentation?
           </a>
         </div>
@@ -125,43 +133,43 @@ export default function Resources() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
           {RESOURCES.map((res) => (
             <div key={res.id} style={{
-              background: 'white', borderRadius: 16, padding: '1.75rem',
-              border: '1.5px solid #f1f5f9', display: 'flex', flexDirection: 'column',
+              background: '#0d1118', borderRadius: 16, padding: '1.75rem',
+              border: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column',
               transition: 'all 0.25s', cursor: 'pointer',
             }}
             onClick={() => setSelectedRes(res)}
             onMouseEnter={e => {
-              e.currentTarget.style.borderColor = '#0A1F44'
+              e.currentTarget.style.borderColor = 'rgba(56,189,248,0.4)'
               e.currentTarget.style.transform = 'translateY(-3px)'
-              e.currentTarget.style.boxShadow = '0 15px 30px rgba(0,0,0,0.06)'
+              e.currentTarget.style.boxShadow = '0 15px 30px rgba(0,0,0,0.5)'
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.borderColor = '#f1f5f9'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
               e.currentTarget.style.transform = 'translateY(0)'
               e.currentTarget.style.boxShadow = 'none'
             }}>
               
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                <div style={{ width: 48, height: 48, borderRadius: 12, background: res.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>
                   {res.icon}
                 </div>
-                <span style={{ background: '#f1f5f9', color: '#475569', padding: '4px 10px', borderRadius: 100, fontSize: '0.72rem', fontWeight: 600 }}>
+                <span style={{ background: 'rgba(255,255,255,0.06)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)', padding: '4px 10px', borderRadius: 100, fontSize: '0.72rem', fontWeight: 600 }}>
                   {res.format}
                 </span>
               </div>
 
-              <div style={{ fontWeight: 800, color: '#0A1F44', fontSize: '1.05rem', marginBottom: '0.5rem' }}>
+              <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '1.05rem', marginBottom: '0.5rem' }}>
                 {res.title}
               </div>
-              <div style={{ color: '#64748b', fontSize: '0.85rem', lineHeight: 1.6, flex: 1, marginBottom: '1.25rem' }}>
+              <div style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: 1.6, flex: 1, marginBottom: '1.25rem' }}>
                 {res.desc}
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #f1f5f9', paddingTop: '1rem', marginTop: 'auto' }}>
-                <span style={{ color: '#16a34a', fontSize: '0.82rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '1rem', marginTop: 'auto' }}>
+                <span style={{ color: '#10b981', fontSize: '0.82rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
                   <i className="fas fa-list-check" /> View Full Checklist
                 </span>
-                <span style={{ color: '#94a3b8', fontSize: '0.78rem' }}>5+ Key Items</span>
+                <span style={{ color: '#64748b', fontSize: '0.78rem' }}>5+ Key Items</span>
               </div>
             </div>
           ))}
@@ -171,35 +179,36 @@ export default function Resources() {
         {selectedRes && (
           <div style={{
             position: 'fixed', inset: 0, zIndex: 10000,
-            background: 'rgba(6, 15, 34, 0.85)', backdropFilter: 'blur(8px)',
+            background: 'rgba(0, 0, 0, 0.85)', backdropFilter: 'blur(10px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem',
           }} onClick={() => setSelectedRes(null)}>
             <div style={{
-              background: 'white', borderRadius: 20, maxWidth: 560, width: '100%',
-              padding: '2.5rem', position: 'relative', boxShadow: '0 25px 60px rgba(0,0,0,0.3)',
+              background: '#121316', borderRadius: 20, maxWidth: 560, width: '100%',
+              padding: '2.5rem', position: 'relative', boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+              border: '1px solid rgba(255,255,255,0.12)'
             }} onClick={e => e.stopPropagation()}>
               
               <button onClick={() => setSelectedRes(null)} style={{
-                position: 'absolute', top: 20, right: 20, background: '#f1f5f9', border: 'none',
-                borderRadius: '50%', width: 34, height: 34, cursor: 'pointer', color: '#64748b',
+                position: 'absolute', top: 20, right: 20, background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)',
+                borderRadius: '50%', width: 34, height: 34, cursor: 'pointer', color: '#ffffff',
               }}>✕</button>
 
               <div style={{ fontSize: 32, marginBottom: 10 }}>{selectedRes.icon}</div>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0A1F44', marginBottom: 8 }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#ffffff', marginBottom: 8 }}>
                 {selectedRes.title}
               </h3>
-              <p style={{ color: '#64748b', fontSize: '0.88rem', marginBottom: '1.5rem' }}>
+              <p style={{ color: '#94a3b8', fontSize: '0.88rem', marginBottom: '1.5rem' }}>
                 {selectedRes.desc}
               </p>
 
-              <div style={{ background: '#f8fafc', borderRadius: 12, padding: '1.25rem', marginBottom: '1.5rem', border: '1px solid #e2e8f0' }}>
-                <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#0A1F44', marginBottom: 10 }}>
+              <div style={{ background: '#090a0d', borderRadius: 12, padding: '1.25rem', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#ffffff', marginBottom: 10 }}>
                   Statutory Requirements:
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {selectedRes.items.map((it, idx) => (
-                    <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: '0.82rem', color: '#334155' }}>
-                      <i className="fas fa-check-circle" style={{ color: '#16a34a', marginTop: 3 }} />
+                    <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: '0.82rem', color: '#cbd5e1' }}>
+                      <i className="fas fa-check-circle" style={{ color: '#10b981', marginTop: 3 }} />
                       <span>{it}</span>
                     </div>
                   ))}
@@ -208,10 +217,10 @@ export default function Resources() {
 
               <div style={{ display: 'flex', gap: 10 }}>
                 <a href={`https://wa.me/917827225372?text=Hello%20Cloud%20Ledger!%20I%20need%20help%20with%20${encodeURIComponent(selectedRes.title)}`} target="_blank" rel="noreferrer"
-                   className="btn btn-whatsapp" style={{ flex: 1, justifyContent: 'center' }}>
+                   className="btn btn-blue" style={{ flex: 1, justifyContent: 'center' }}>
                   <i className="fab fa-whatsapp" /> Inquire via WhatsApp
                 </a>
-                <button onClick={() => setSelectedRes(null)} className="btn btn-navy" style={{ padding: '10px 20px' }}>
+                <button onClick={() => setSelectedRes(null)} className="btn" style={{ padding: '10px 20px', background: 'rgba(255,255,255,0.08)', color: 'white', border: '1px solid rgba(255,255,255,0.12)' }}>
                   Close
                 </button>
               </div>

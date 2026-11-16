@@ -342,26 +342,34 @@ export default function Services({ onSelectService }) {
   }
 
   return (
-    <section id="services" style={{ background: '#f8fafc' }}>
+    <section id="services" style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '5rem 0' }}>
       <div className="container">
         
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '2rem', marginBottom: '2.5rem' }}>
           <div>
-            <div className="section-badge">
+            <div className="section-badge" style={{ background: 'rgba(30,96,255,0.12)', border: '1px solid rgba(30,96,255,0.25)', color: '#38bdf8' }}>
               <i className="fas fa-th-large" /> Professional Service Directory
             </div>
-            <h2 className="section-title">
-              Statutory, Advisory &<br /><span className="accent">Corporate Services</span>
+            <h2 className="section-title" style={{ color: '#ffffff' }}>
+              Statutory, Advisory &<br />
+              <span style={{
+                background: 'linear-gradient(135deg, #38bdf8 0%, #10b981 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
+              }}>
+                Corporate Services
+              </span>
             </h2>
-            <p className="section-desc">
+            <p className="section-desc" style={{ color: '#94a3b8' }}>
               Explore our structured 15-category service catalogue. Click any service card to view complete applicability, required documents, step-by-step procedure and estimated timelines.
             </p>
           </div>
 
           {/* Search bar */}
           <div style={{ position: 'relative', minWidth: 300 }}>
-            <i className="fas fa-search" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+            <i className="fas fa-search" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: '#64748b' }} />
             <input
               type="text"
               value={search}
@@ -369,9 +377,10 @@ export default function Services({ onSelectService }) {
               placeholder="Search across 315 services..."
               style={{
                 width: '100%', padding: '12px 18px 12px 46px',
-                border: '1.5px solid #e2e8f0', borderRadius: 12,
+                border: '1.5px solid rgba(255,255,255,0.12)', borderRadius: 12,
+                background: '#0d1118', color: '#ffffff',
                 fontSize: '0.9rem', outline: 'none', fontFamily: 'Inter, sans-serif',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
+                boxShadow: '0 4px 15px rgba(0,0,0,0.4)'
               }}
             />
           </div>
@@ -382,10 +391,10 @@ export default function Services({ onSelectService }) {
           {FILTERS.map(f => (
             <button key={f.key} onClick={() => { setActiveFilter(f.key); setSearch(''); setVisibleCount(12) }}
               style={{
-                padding: '8px 18px', borderRadius: 100, border: '1.5px solid',
-                borderColor: activeFilter === f.key ? '#0A1F44' : '#e2e8f0',
-                background: activeFilter === f.key ? '#0A1F44' : 'white',
-                color: activeFilter === f.key ? 'white' : '#64748b',
+                padding: '8px 18px', borderRadius: 100, border: '1px solid',
+                borderColor: activeFilter === f.key ? '#1e60ff' : 'rgba(255,255,255,0.1)',
+                background: activeFilter === f.key ? '#1e60ff' : 'rgba(255,255,255,0.04)',
+                color: activeFilter === f.key ? '#ffffff' : '#94a3b8',
                 fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
                 transition: 'all 0.2s', fontFamily: 'Inter, sans-serif',
                 whiteSpace: 'nowrap'
@@ -397,12 +406,12 @@ export default function Services({ onSelectService }) {
 
         {/* Grid */}
         {filtered.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '4rem', color: '#94a3b8', background: 'white', borderRadius: 16 }}>
+          <div style={{ textAlign: 'center', padding: '4rem', color: '#94a3b8', background: '#0d1118', borderRadius: 16, border: '1px solid rgba(255,255,255,0.08)' }}>
             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔍</div>
-            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#475569' }}>No services found matching "{search}"</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>No services found matching "{search}"</div>
             <div style={{ marginTop: '0.5rem', color: '#94a3b8', fontSize: '0.9rem' }}>Try searching: GST, ITR, Incorporation, NGO, Audit, Bookkeeping</div>
             <button onClick={() => { setSearch(''); setActiveFilter('all') }}
-              style={{ marginTop: '1.25rem', padding: '8px 22px', background: '#0A1F44', color: 'white', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>
+              style={{ marginTop: '1.25rem', padding: '8px 22px', background: '#ffffff', color: '#000000', border: 'none', borderRadius: 100, cursor: 'pointer', fontWeight: 700 }}>
               Reset Filters
             </button>
           </div>
@@ -411,45 +420,45 @@ export default function Services({ onSelectService }) {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
               {filtered.slice(0, visibleCount).map((s, i) => (
                 <div key={i} style={{
-                  background: 'white', borderRadius: 18, padding: '1.75rem',
-                  border: '1.5px solid #f1f5f9', transition: 'all 0.25s',
+                  background: '#0d1118', borderRadius: 18, padding: '1.75rem',
+                  border: '1px solid rgba(255,255,255,0.08)', transition: 'all 0.25s',
                   cursor: 'pointer', position: 'relative', display: 'flex', flexDirection: 'column',
                 }}
                 onClick={() => setSelectedService(s)}
                 onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = 'rgba(29,185,84,0.4)'
+                  e.currentTarget.style.borderColor = 'rgba(56,189,248,0.4)'
                   e.currentTarget.style.transform = 'translateY(-4px)'
-                  e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.07)'
+                  e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.5)'
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = '#f1f5f9'
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
                   e.currentTarget.style.transform = 'translateY(0)'
                   e.currentTarget.style.boxShadow = 'none'
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                    <div style={{ fontSize: 30, background: '#f8fafc', width: 50, height: 50, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ fontSize: 26, background: 'rgba(255,255,255,0.05)', width: 48, height: 48, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {s.icon}
                     </div>
-                    <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#16a34a', background: 'rgba(29,185,84,0.1)', padding: '3px 10px', borderRadius: 100 }}>
+                    <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#34d399', background: 'rgba(16,185,129,0.12)', padding: '3px 10px', borderRadius: 100, border: '1px solid rgba(16,185,129,0.2)' }}>
                       View Details
                     </span>
                   </div>
 
-                  <div style={{ color: '#94a3b8', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: 4 }}>
+                  <div style={{ color: '#38bdf8', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: 4 }}>
                     {s.categoryName}
                   </div>
-                  <div style={{ fontWeight: 800, color: '#0A1F44', fontSize: '1rem', marginBottom: '0.5rem', lineHeight: 1.4 }}>
+                  <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '1.02rem', marginBottom: '0.5rem', lineHeight: 1.4 }}>
                     {s.title}
                   </div>
-                  <div style={{ color: '#64748b', fontSize: '0.84rem', lineHeight: 1.6, flex: 1, marginBottom: '1.25rem' }}>
+                  <div style={{ color: '#94a3b8', fontSize: '0.84rem', lineHeight: 1.6, flex: 1, marginBottom: '1.25rem' }}>
                     {s.desc}
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #f8fafc', paddingTop: '1rem', marginTop: 'auto' }}>
-                    <span style={{ color: '#0A1F44', fontSize: '0.78rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
-                      Full Guide <i className="fas fa-arrow-right" style={{ fontSize: '0.68rem', color: '#16a34a' }} />
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '1rem', marginTop: 'auto' }}>
+                    <span style={{ color: '#38bdf8', fontSize: '0.78rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
+                      Full Guide <i className="fas fa-arrow-right" style={{ fontSize: '0.68rem', color: '#38bdf8' }} />
                     </span>
-                    <span style={{ color: '#94a3b8', fontSize: '0.72rem' }}>Govt Portal Aligned</span>
+                    <span style={{ color: '#64748b', fontSize: '0.72rem' }}>Govt Portal Aligned</span>
                   </div>
                 </div>
               ))}
@@ -457,7 +466,7 @@ export default function Services({ onSelectService }) {
 
             {visibleCount < filtered.length && (
               <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-                <button onClick={() => setVisibleCount(v => v + 8)} className="btn btn-navy btn-lg">
+                <button onClick={() => setVisibleCount(v => v + 8)} className="btn btn-white" style={{ padding: '12px 28px' }}>
                   <i className="fas fa-plus" /> Load More Services ({filtered.length - visibleCount} more)
                 </button>
               </div>

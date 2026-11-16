@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
-import { sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { sendPasswordResetEmail } from 'firebase/auth'
 import { auth } from '../firebase'
 
 const WA_NUMBER = '917827225372'
@@ -22,28 +22,6 @@ export default function LoginPage() {
 
   const handleLoginChange = e => setLoginForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   const handleRegChange   = e => setRegForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
-
-  // Google Social Sign-In
-  const handleGoogleSignIn = async () => {
-    try {
-      setLoading(true)
-      const provider = new GoogleAuthProvider()
-      const result = await signInWithPopup(auth, provider)
-      toast.success(`Welcome, ${result.user.displayName || result.user.email}!`)
-      navigate('/dashboard/client')
-    } catch (err) {
-      console.warn('Google Auth notice:', err)
-      if (err.code !== 'auth/popup-closed-by-user') {
-        toast.error('Google Sign-In: ' + (err.message || 'Please use email login.'))
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleSocialNotice = (provider) => {
-    toast(`Continue with ${provider} is initializing. You can also sign in with email.`, { icon: '🔐' })
-  }
 
   // Unified Smart Login: Automatically routes by role from database
   const handleLogin = async (e) => {
@@ -206,87 +184,8 @@ export default function LoginPage() {
           marginBottom: '1.8rem',
           letterSpacing: '-0.3px'
         }}>
-          {activeTab === 'register' ? 'Create your account' : activeTab === 'whatsapp' ? 'Support & Access' : 'Log in or sign up'}
+          {activeTab === 'register' ? 'Create your account' : activeTab === 'whatsapp' ? 'Support & Access' : 'Sign in to your account'}
         </h2>
-
-        {/* Social Buttons (Image 8) */}
-        {activeTab !== 'whatsapp' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: '1.5rem' }}>
-            {/* Google */}
-            <button
-              type="button"
-              onClick={handleGoogleSignIn}
-              style={{
-                width: '100%', height: 48,
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                borderRadius: 12, color: '#ffffff',
-                fontWeight: 600, fontSize: '0.92rem',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
-                cursor: 'pointer', transition: 'all 0.2s'
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
-              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)'}
-            >
-              <svg width="20" height="20" viewBox="0 0 48 48">
-                <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
-                <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
-                <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
-                <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
-              </svg>
-              Continue with Google
-            </button>
-
-            {/* Apple */}
-            <button
-              type="button"
-              onClick={() => handleSocialNotice('Apple')}
-              style={{
-                width: '100%', height: 48,
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                borderRadius: 12, color: '#ffffff',
-                fontWeight: 600, fontSize: '0.92rem',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
-                cursor: 'pointer', transition: 'all 0.2s'
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
-              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)'}
-            >
-              <i className="fab fa-apple" style={{ fontSize: '1.25rem' }} />
-              Continue with Apple
-            </button>
-
-            {/* Facebook */}
-            <button
-              type="button"
-              onClick={() => handleSocialNotice('Facebook')}
-              style={{
-                width: '100%', height: 48,
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                borderRadius: 12, color: '#ffffff',
-                fontWeight: 600, fontSize: '0.92rem',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
-                cursor: 'pointer', transition: 'all 0.2s'
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
-              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)'}
-            >
-              <i className="fab fa-facebook" style={{ color: '#1877f2', fontSize: '1.25rem' }} />
-              Continue with Facebook
-            </button>
-          </div>
-        )}
-
-        {/* OR Divider (Image 8) */}
-        {activeTab !== 'whatsapp' && (
-          <div style={{ display: 'flex', alignItems: 'center', margin: '1.6rem 0', gap: 14 }}>
-            <div style={{ flex: 1, height: 1, background: 'rgba(255, 255, 255, 0.1)' }} />
-            <span style={{ color: '#71717a', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.5px' }}>OR</span>
-            <div style={{ flex: 1, height: 1, background: 'rgba(255, 255, 255, 0.1)' }} />
-          </div>
-        )}
 
         {/* ════ TAB 1: SIGN IN ════ */}
         {activeTab === 'login' && (

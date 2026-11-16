@@ -19,7 +19,6 @@ import Footer from './components/Footer'
 import WhatsAppFloat from './components/WhatsAppFloat'
 import EnquiryPopup from './components/EnquiryPopup'
 import Calculators from './components/Calculators'
-import ThemeSwitcher from './components/ThemeSwitcher'
 
 // Auth pages
 import LoginPage from './pages/LoginPage'
@@ -49,7 +48,6 @@ function PublicLayout() {
       <Footer />
       <WhatsAppFloat />
       <EnquiryPopup />
-      <ThemeSwitcher />
     </>
   )
 }

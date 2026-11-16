@@ -25,19 +25,27 @@ export default function About() {
   ]
 
   return (
-    <section id="about" style={{ background: '#ffffff', borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9' }}>
+    <section id="about" style={{ background: '#050608', borderTop: '1px solid rgba(255, 255, 255, 0.08)', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', padding: '5rem 0' }}>
       <div className="container">
         
         {/* Top Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '4rem', alignItems: 'center', marginBottom: '4rem' }}>
           <div>
-            <div className="section-badge">
+            <div className="section-badge" style={{ background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38bdf8' }}>
               <i className="fas fa-building" /> About Cloud Ledger
             </div>
-            <h2 className="section-title">
-              Empowering Indian Businesses With <span className="accent">Structured Compliance</span>
+            <h2 className="section-title" style={{ color: '#ffffff' }}>
+              Empowering Indian Businesses With <br />
+              <span style={{
+                background: 'linear-gradient(135deg, #38bdf8 0%, #10b981 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
+              }}>
+                Structured Compliance
+              </span>
             </h2>
-            <p className="section-desc" style={{ marginBottom: '1.5rem' }}>
+            <p className="section-desc" style={{ color: '#94a3b8', marginBottom: '1.5rem' }}>
               Cloud Ledger is a modern business management and professional advisory platform. We unite technical compliance expertise with modern cloud infrastructure to deliver seamless taxation, company registration, and accounting operations.
             </p>
             <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '2rem' }}>
@@ -45,15 +53,15 @@ export default function About() {
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-              <div style={{ borderLeft: '3px solid #1DB954', paddingLeft: '1rem' }}>
-                <div style={{ fontWeight: 800, color: '#0A1F44', fontSize: '1.1rem' }}>Our Mission</div>
-                <div style={{ color: '#64748b', fontSize: '0.85rem', marginTop: 4 }}>
+              <div style={{ borderLeft: '3px solid #10b981', paddingLeft: '1rem' }}>
+                <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '1.1rem' }}>Our Mission</div>
+                <div style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: 4 }}>
                   To remove compliance friction so entrepreneurs can focus entirely on scaling their core operations.
                 </div>
               </div>
-              <div style={{ borderLeft: '3px solid #0A1F44', paddingLeft: '1rem' }}>
-                <div style={{ fontWeight: 800, color: '#0A1F44', fontSize: '1.1rem' }}>Our Vision</div>
-                <div style={{ color: '#64748b', fontSize: '0.85rem', marginTop: 4 }}>
+              <div style={{ borderLeft: '3px solid #1e60ff', paddingLeft: '1rem' }}>
+                <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '1.1rem' }}>Our Vision</div>
+                <div style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: 4 }}>
                   To become India's premier integrated digital business compliance and management ecosystem.
                 </div>
               </div>
@@ -62,24 +70,23 @@ export default function About() {
 
           {/* Right Card */}
           <div style={{
-            background: 'linear-gradient(135deg, #0A1F44 0%, #060f22 100%)',
+            background: '#0d1118',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: 24, padding: '2.5rem', color: 'white', position: 'relative', overflow: 'hidden',
-            boxShadow: '0 20px 40px rgba(10,31,68,0.15)'
+            boxShadow: '0 20px 40px rgba(0,0,0,0.6)'
           }}>
-            <div style={{ position: 'absolute', top: -50, right: -50, width: 200, height: 200, background: '#1DB954', opacity: 0.1, borderRadius: '50%', filter: 'blur(40px)' }} />
-            
             <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🇮🇳</div>
             <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem', color: 'white' }}>
               Engineered for the Indian Regulatory Ecosystem
             </h3>
-            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+            <p style={{ color: '#94a3b8', fontSize: '0.88rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
               From the Ministry of Corporate Affairs (MCA) to the GSTN Common Portal, Income Tax e-Filing, and EPFO/ESIC portals, our systems align directly with India's statutory authorities.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: '0.82rem', color: 'rgba(255,255,255,0.85)' }}>
-              <div><i className="fas fa-check" style={{ color: '#25d466', marginRight: 8 }} /> Multi-state GST filing & reconciliation</div>
-              <div><i className="fas fa-check" style={{ color: '#25d466', marginRight: 8 }} /> Complete MCA & ROC secretarial governance</div>
-              <div><i className="fas fa-check" style={{ color: '#25d466', marginRight: 8 }} /> Section 8, Trust, 12A/80G NGO compliance</div>
-              <div><i className="fas fa-check" style={{ color: '#25d466', marginRight: 8 }} /> MSME Udyam & priority sector support</div>
+              <div><i className="fas fa-check" style={{ color: '#10b981', marginRight: 8 }} /> Multi-state GST filing & reconciliation</div>
+              <div><i className="fas fa-check" style={{ color: '#10b981', marginRight: 8 }} /> Complete MCA & ROC secretarial governance</div>
+              <div><i className="fas fa-check" style={{ color: '#10b981', marginRight: 8 }} /> Section 8, Trust, 12A/80G NGO compliance</div>
+              <div><i className="fas fa-check" style={{ color: '#10b981', marginRight: 8 }} /> MSME Udyam & priority sector support</div>
             </div>
           </div>
         </div>
@@ -88,12 +95,12 @@ export default function About() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}>
           {pillars.map((p, i) => (
             <div key={i} style={{
-              background: '#f8fafc', border: '1.5px solid #e2e8f0', borderRadius: 16,
+              background: '#0d1118', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: 16,
               padding: '1.5rem', transition: 'all 0.2s',
             }}>
               <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{p.icon}</div>
-              <div style={{ fontWeight: 800, color: '#0A1F44', fontSize: '1rem', marginBottom: '0.5rem' }}>{p.title}</div>
-              <div style={{ color: '#64748b', fontSize: '0.82rem', lineHeight: 1.6 }}>{p.desc}</div>
+              <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '1rem', marginBottom: '0.5rem' }}>{p.title}</div>
+              <div style={{ color: '#94a3b8', fontSize: '0.82rem', lineHeight: 1.6 }}>{p.desc}</div>
             </div>
           ))}
         </div>

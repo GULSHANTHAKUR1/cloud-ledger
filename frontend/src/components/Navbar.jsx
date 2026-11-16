@@ -10,18 +10,17 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
+    let ticking = false
     const onScroll = () => {
-      setScrolled(window.scrollY > 50)
-      const sections = ['features', 'services', 'calculators', 'about', 'resources', 'industries', 'knowledge', 'contact']
-      const current = sections.find(id => {
-        const el = document.getElementById(id)
-        if (!el) return false
-        const rect = el.getBoundingClientRect()
-        return rect.top <= 120 && rect.bottom >= 120
-      })
-      setActiveSection(current || '')
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 40)
+          ticking = false
+        })
+        ticking = true
+      }
     }
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -81,9 +80,9 @@ export default function Navbar() {
 
       {/* CTA Buttons */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-blue"
-           style={{ padding: '8px 20px', borderRadius: 9999, fontSize: '0.84rem' }}>
-          Talk to Agent ↗
+        <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-whatsapp"
+           style={{ padding: '8px 18px', borderRadius: 9999, fontSize: '0.82rem' }}>
+          <i className="fab fa-whatsapp" /> WhatsApp
         </a>
         <Link to="/login" className="btn btn-navy" style={{ padding: '8px 20px', borderRadius: 9999, fontSize: '0.84rem' }}>
           Login
@@ -111,8 +110,8 @@ export default function Navbar() {
             </a>
           ))}
           <div style={{ display: 'flex', gap: 10, marginTop: 10 }}>
-            <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-blue" style={{ flex: 1, justifyContent: 'center' }}>
-              Talk to Agent ↗
+            <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-whatsapp" style={{ flex: 1, justifyContent: 'center' }}>
+              <i className="fab fa-whatsapp" /> WhatsApp
             </a>
             <Link to="/login" onClick={() => setMobileOpen(false)} className="btn btn-navy" style={{ flex: 1, justifyContent: 'center' }}>
               Login

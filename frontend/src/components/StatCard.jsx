@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export function useCountUp(target, duration = 1500) {
+export function useCountUp(target, duration = 1200) {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
@@ -12,11 +12,27 @@ export function useCountUp(target, duration = 1500) {
 
     let startTimestamp = null
     let animationFrameId = null
+    let lastRendered = 0
+    let lastTime = 0
 
     const step = (timestamp) => {
-      if (!startTimestamp) startTimestamp = timestamp
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1)
-      setCount(Math.round(progress * numericTarget))
+      if (!startTimestamp) {
+        startTimestamp = timestamp
+        lastTime = timestamp
+      }
+      const elapsed = timestamp - startTimestamp
+      const progress = Math.min(elapsed / duration, 1)
+      const easeOut = 1 - Math.pow(1 - progress, 3)
+      const current = Math.round(easeOut * numericTarget)
+
+      if (timestamp - lastTime >= 35 || progress >= 1) {
+        if (current !== lastRendered || progress >= 1) {
+          lastRendered = current
+          setCount(current)
+        }
+        lastTime = timestamp
+      }
+
       if (progress < 1) {
         animationFrameId = requestAnimationFrame(step)
       }

@@ -203,61 +203,69 @@ export default function Calculators() {
   }
 
   return (
-    <section id="calculators" style={{ background: '#f8fafc', padding: '90px 1.5rem', borderTop: '1px solid #e2e8f0' }}>
+    <section id="calculators" style={{ background: '#000000', padding: '90px 1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
       <div className="container" style={{ maxWidth: 1100, margin: '0 auto' }}>
 
         {/* Section Heading */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <span className="section-badge" style={{ background: 'rgba(29,185,84,0.1)', color: '#17a248', borderColor: 'rgba(29,185,84,0.25)' }}>
+          <span className="section-badge" style={{ background: 'rgba(56, 189, 248, 0.12)', color: '#38bdf8', borderColor: 'rgba(56, 189, 248, 0.25)' }}>
             <i className="fas fa-calculator" /> Interactive Financial Suite
           </span>
-          <h2 className="section-title">
-            Smart Compliance & <span className="accent">Tax Calculators</span>
+          <h2 className="section-title" style={{ color: '#ffffff' }}>
+            Smart Compliance & <br />
+            <span style={{
+              background: 'linear-gradient(135deg, #38bdf8 0%, #10b981 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              display: 'inline-block'
+            }}>
+              Tax Calculators
+            </span>
           </h2>
-          <p className="section-desc" style={{ margin: '0 auto' }}>
+          <p className="section-desc" style={{ margin: '0 auto', color: '#94a3b8' }}>
             Instant, mathematically verified calculations tailored to the latest statutory rules, tax slabs, and government notifications.
           </p>
 
           {/* Calculator Switcher Pills */}
           <div style={{
-            display: 'inline-flex', background: '#e2e8f0', borderRadius: 100,
-            padding: 4, marginTop: '2rem', gap: 4, boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.05)'
+            display: 'inline-flex', background: '#0d1118', borderRadius: 100,
+            padding: 4, marginTop: '2rem', gap: 4, border: '1px solid rgba(255,255,255,0.1)'
           }}>
             <button
               onClick={() => setActiveCalc('gst')}
               style={{
                 padding: '9px 22px', border: 'none', borderRadius: 100, cursor: 'pointer',
                 fontWeight: 700, fontSize: '0.85rem', transition: 'all 0.2s',
-                background: activeCalc === 'gst' ? '#0A1F44' : 'transparent',
-                color: activeCalc === 'gst' ? 'white' : '#475569',
-                boxShadow: activeCalc === 'gst' ? '0 4px 12px rgba(10,31,68,0.25)' : 'none'
+                background: activeCalc === 'gst' ? '#1e60ff' : 'transparent',
+                color: activeCalc === 'gst' ? '#ffffff' : '#94a3b8',
+                boxShadow: activeCalc === 'gst' ? '0 4px 15px rgba(30,96,255,0.4)' : 'none'
               }}
             >
-              <i className="fas fa-percent" style={{ marginRight: 6, color: '#1DB954' }} /> GST Calculator
+              <i className="fas fa-percent" style={{ marginRight: 6, color: '#38bdf8' }} /> GST Calculator
             </button>
             <button
               onClick={() => setActiveCalc('tax')}
               style={{
                 padding: '9px 22px', border: 'none', borderRadius: 100, cursor: 'pointer',
                 fontWeight: 700, fontSize: '0.85rem', transition: 'all 0.2s',
-                background: activeCalc === 'tax' ? '#0A1F44' : 'transparent',
-                color: activeCalc === 'tax' ? 'white' : '#475569',
-                boxShadow: activeCalc === 'tax' ? '0 4px 12px rgba(10,31,68,0.25)' : 'none'
+                background: activeCalc === 'tax' ? '#1e60ff' : 'transparent',
+                color: activeCalc === 'tax' ? '#ffffff' : '#94a3b8',
+                boxShadow: activeCalc === 'tax' ? '0 4px 15px rgba(30,96,255,0.4)' : 'none'
               }}
             >
-              <i className="fas fa-balance-scale" style={{ marginRight: 6, color: '#1DB954' }} /> Income Tax (New vs Old)
+              <i className="fas fa-balance-scale" style={{ marginRight: 6, color: '#10b981' }} /> Income Tax (New vs Old)
             </button>
             <button
               onClick={() => setActiveCalc('startup')}
               style={{
                 padding: '9px 22px', border: 'none', borderRadius: 100, cursor: 'pointer',
                 fontWeight: 700, fontSize: '0.85rem', transition: 'all 0.2s',
-                background: activeCalc === 'startup' ? '#0A1F44' : 'transparent',
-                color: activeCalc === 'startup' ? 'white' : '#475569',
-                boxShadow: activeCalc === 'startup' ? '0 4px 12px rgba(10,31,68,0.25)' : 'none'
+                background: activeCalc === 'startup' ? '#1e60ff' : 'transparent',
+                color: activeCalc === 'startup' ? '#ffffff' : '#94a3b8',
+                boxShadow: activeCalc === 'startup' ? '0 4px 15px rgba(30,96,255,0.4)' : 'none'
               }}
             >
-              <i className="fas fa-rocket" style={{ marginRight: 6, color: '#1DB954' }} /> Startup Cost Estimator
+              <i className="fas fa-rocket" style={{ marginRight: 6, color: '#f59e0b' }} /> Startup Cost Estimator
             </button>
           </div>
         </div>
@@ -267,20 +275,20 @@ export default function Calculators() {
         ══════════════════════════════════════════════════════════════════════════ */}
         {activeCalc === 'gst' && (
           <div style={{
-            background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0',
-            boxShadow: '0 15px 35px rgba(0,0,0,0.06)', overflow: 'hidden',
+            background: '#0d1118', borderRadius: 20, border: '1px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden',
             display: 'grid', gridTemplateColumns: '1.2fr 1fr'
           }}>
             {/* Input Controls */}
             <div style={{ padding: '2.5rem' }}>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0A1F44', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ width: 8, height: 20, background: '#1DB954', borderRadius: 4, display: 'inline-block' }} />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 8, height: 20, background: '#10b981', borderRadius: 4, display: 'inline-block' }} />
                 GST Parameters & Slabs
               </h3>
 
               {/* Amount Input */}
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: 8 }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#94a3b8', marginBottom: 8 }}>
                   Transaction Amount (₹)
                 </label>
                 <div style={{ position: 'relative' }}>
@@ -291,8 +299,8 @@ export default function Calculators() {
                     onChange={e => setGstAmount(e.target.value)}
                     style={{
                       width: '100%', padding: '12px 16px 12px 38px',
-                      fontSize: '1.1rem', fontWeight: 700, color: '#0A1F44',
-                      border: '2px solid #cbd5e1', borderRadius: 10, outline: 'none'
+                      fontSize: '1.1rem', fontWeight: 700, color: '#ffffff',
+                      background: '#090a0d', border: '1.5px solid rgba(255,255,255,0.12)', borderRadius: 10, outline: 'none'
                     }}
                   />
                 </div>
@@ -300,7 +308,7 @@ export default function Calculators() {
 
               {/* GST Slab Rates */}
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: 8 }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#94a3b8', marginBottom: 8 }}>
                   GST Slab Rate
                 </label>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
@@ -310,10 +318,10 @@ export default function Calculators() {
                       type="button"
                       onClick={() => setGstRate(rate)}
                       style={{
-                        padding: '10px 0', border: gstRate === rate ? '2px solid #1DB954' : '1.5px solid #cbd5e1',
+                        padding: '10px 0', border: gstRate === rate ? '1.5px solid #10b981' : '1px solid rgba(255,255,255,0.1)',
                         borderRadius: 10, fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer',
-                        background: gstRate === rate ? 'rgba(29,185,84,0.1)' : 'white',
-                        color: gstRate === rate ? '#17a248' : '#475569',
+                        background: gstRate === rate ? 'rgba(16,185,129,0.15)' : 'rgba(255,255,255,0.03)',
+                        color: gstRate === rate ? '#10b981' : '#94a3b8',
                         transition: 'all 0.15s'
                       }}
                     >
@@ -326,7 +334,7 @@ export default function Calculators() {
               {/* Exclusive vs Inclusive */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#334155', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#94a3b8', marginBottom: 6 }}>
                     Calculation Type
                   </label>
                   <div style={{ display: 'flex', gap: 6 }}>
@@ -335,9 +343,9 @@ export default function Calculators() {
                       onClick={() => setGstType('exclusive')}
                       style={{
                         flex: 1, padding: '8px', borderRadius: 8, fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
-                        border: gstType === 'exclusive' ? '1.5px solid #0A1F44' : '1px solid #cbd5e1',
-                        background: gstType === 'exclusive' ? '#0A1F44' : 'white',
-                        color: gstType === 'exclusive' ? 'white' : '#64748b'
+                        border: gstType === 'exclusive' ? '1.5px solid #1e60ff' : '1px solid rgba(255,255,255,0.1)',
+                        background: gstType === 'exclusive' ? '#1e60ff' : 'rgba(255,255,255,0.03)',
+                        color: gstType === 'exclusive' ? 'white' : '#94a3b8'
                       }}
                     >
                       Exclusive (Add)
@@ -347,9 +355,9 @@ export default function Calculators() {
                       onClick={() => setGstType('inclusive')}
                       style={{
                         flex: 1, padding: '8px', borderRadius: 8, fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
-                        border: gstType === 'inclusive' ? '1.5px solid #0A1F44' : '1px solid #cbd5e1',
-                        background: gstType === 'inclusive' ? '#0A1F44' : 'white',
-                        color: gstType === 'inclusive' ? 'white' : '#64748b'
+                        border: gstType === 'inclusive' ? '1.5px solid #1e60ff' : '1px solid rgba(255,255,255,0.1)',
+                        background: gstType === 'inclusive' ? '#1e60ff' : 'rgba(255,255,255,0.03)',
+                        color: gstType === 'inclusive' ? 'white' : '#94a3b8'
                       }}
                     >
                       Inclusive (Extract)
@@ -358,7 +366,7 @@ export default function Calculators() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#334155', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#94a3b8', marginBottom: 6 }}>
                     Supply Jurisdiction
                   </label>
                   <div style={{ display: 'flex', gap: 6 }}>
@@ -367,9 +375,9 @@ export default function Calculators() {
                       onClick={() => setSupplyType('intra')}
                       style={{
                         flex: 1, padding: '8px', borderRadius: 8, fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
-                        border: supplyType === 'intra' ? '1.5px solid #1DB954' : '1px solid #cbd5e1',
-                        background: supplyType === 'intra' ? '#1DB954' : 'white',
-                        color: supplyType === 'intra' ? 'white' : '#64748b'
+                        border: supplyType === 'intra' ? '1.5px solid #10b981' : '1px solid rgba(255,255,255,0.1)',
+                        background: supplyType === 'intra' ? '#10b981' : 'rgba(255,255,255,0.03)',
+                        color: supplyType === 'intra' ? 'white' : '#94a3b8'
                       }}
                     >
                       Intra (CGST+SGST)
@@ -379,9 +387,9 @@ export default function Calculators() {
                       onClick={() => setSupplyType('inter')}
                       style={{
                         flex: 1, padding: '8px', borderRadius: 8, fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
-                        border: supplyType === 'inter' ? '1.5px solid #1DB954' : '1px solid #cbd5e1',
-                        background: supplyType === 'inter' ? '#1DB954' : 'white',
-                        color: supplyType === 'inter' ? 'white' : '#64748b'
+                        border: supplyType === 'inter' ? '1.5px solid #10b981' : '1px solid rgba(255,255,255,0.1)',
+                        background: supplyType === 'inter' ? '#10b981' : 'rgba(255,255,255,0.03)',
+                        color: supplyType === 'inter' ? 'white' : '#94a3b8'
                       }}
                     >
                       Inter (IGST)
@@ -392,7 +400,7 @@ export default function Calculators() {
             </div>
 
             {/* Results Output Card */}
-            <div style={{ background: '#0A1F44', padding: '2.5rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ background: '#11141c', padding: '2.5rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderLeft: '1px solid rgba(255,255,255,0.08)' }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
                   <span style={{ fontSize: '0.85rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 700 }}>
@@ -462,19 +470,19 @@ export default function Calculators() {
         ══════════════════════════════════════════════════════════════════════════ */}
         {activeCalc === 'tax' && (
           <div style={{
-            background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0',
-            boxShadow: '0 15px 35px rgba(0,0,0,0.06)', overflow: 'hidden',
+            background: '#0d1118', borderRadius: 20, border: '1px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden',
             display: 'grid', gridTemplateColumns: '1.1fr 1fr'
           }}>
             {/* Income Inputs */}
             <div style={{ padding: '2.5rem' }}>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0A1F44', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ width: 8, height: 20, background: '#1DB954', borderRadius: 4, display: 'inline-block' }} />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 8, height: 20, background: '#10b981', borderRadius: 4, display: 'inline-block' }} />
                 Annual Income & Deductions (FY 24-25)
               </h3>
 
               <div style={{ marginBottom: '1.2rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: 6 }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#94a3b8', marginBottom: 6 }}>
                   Total Annual Income (Salary / Business Profit)
                 </label>
                 <div style={{ position: 'relative' }}>
@@ -483,58 +491,58 @@ export default function Calculators() {
                     type="number"
                     value={annualIncome}
                     onChange={e => setAnnualIncome(e.target.value)}
-                    style={{ width: '100%', padding: '10px 14px 10px 34px', fontSize: '1rem', fontWeight: 700, border: '1.5px solid #cbd5e1', borderRadius: 9 }}
+                    style={{ width: '100%', padding: '10px 14px 10px 34px', fontSize: '1rem', fontWeight: 700, background: '#090a0d', color: 'white', border: '1.5px solid rgba(255,255,255,0.12)', borderRadius: 9 }}
                   />
                 </div>
               </div>
 
-              <div style={{ padding: '12px', background: '#f8fafc', borderRadius: 10, border: '1px solid #e2e8f0', marginBottom: '1.2rem' }}>
-                <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 8 }}>
+              <div style={{ padding: '14px', background: '#090a0d', borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)', marginBottom: '1.2rem' }}>
+                <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#38bdf8', textTransform: 'uppercase', marginBottom: 8 }}>
                   Old Regime Deductions (Optional)
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: 8 }}>
                   <div>
-                    <label style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>Sec 80C (PPF/ELSS - max 1.5L)</label>
+                    <label style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>Sec 80C (PPF/ELSS - max 1.5L)</label>
                     <input
                       type="number"
                       value={ded80C}
                       onChange={e => setDed80C(e.target.value)}
-                      style={{ width: '100%', padding: '7px 10px', fontSize: '0.85rem', border: '1px solid #cbd5e1', borderRadius: 6, marginTop: 4 }}
+                      style={{ width: '100%', padding: '7px 10px', fontSize: '0.85rem', background: '#12141a', color: 'white', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 6, marginTop: 4 }}
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>Sec 80D (Health Insurance)</label>
+                    <label style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>Sec 80D (Health Insurance)</label>
                     <input
                       type="number"
                       value={ded80D}
                       onChange={e => setDed80D(e.target.value)}
-                      style={{ width: '100%', padding: '7px 10px', fontSize: '0.85rem', border: '1px solid #cbd5e1', borderRadius: 6, marginTop: 4 }}
+                      style={{ width: '100%', padding: '7px 10px', fontSize: '0.85rem', background: '#12141a', color: 'white', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 6, marginTop: 4 }}
                     />
                   </div>
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>Other Deductions / HRA Exemption</label>
+                  <label style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>Other Deductions / HRA Exemption</label>
                   <input
                     type="number"
                     value={otherDed}
                     onChange={e => setOtherDed(e.target.value)}
-                    style={{ width: '100%', padding: '7px 10px', fontSize: '0.85rem', border: '1px solid #cbd5e1', borderRadius: 6, marginTop: 4 }}
+                    style={{ width: '100%', padding: '7px 10px', fontSize: '0.85rem', background: '#12141a', color: 'white', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 6, marginTop: 4 }}
                   />
                 </div>
               </div>
 
-              <div style={{ fontSize: '0.75rem', color: '#64748b', lineHeight: 1.5 }}>
-                <i className="fas fa-info-circle" style={{ color: '#0284c7', marginRight: 4 }} />
-                New Tax Regime automatically provides <strong>₹75,000 standard deduction</strong> and <strong>zero tax up to ₹7.75 Lakhs</strong> via Section 87A rebate.
+              <div style={{ fontSize: '0.75rem', color: '#94a3b8', lineHeight: 1.5 }}>
+                <i className="fas fa-info-circle" style={{ color: '#38bdf8', marginRight: 4 }} />
+                New Tax Regime automatically provides <strong style={{ color: 'white' }}>₹75,000 standard deduction</strong> and <strong style={{ color: 'white' }}>zero tax up to ₹7.75 Lakhs</strong> via Section 87A rebate.
               </div>
             </div>
 
             {/* Side-by-Side Regime Comparison */}
-            <div style={{ background: '#0A1F44', padding: '2.5rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ background: '#11141c', padding: '2.5rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderLeft: '1px solid rgba(255,255,255,0.08)' }}>
               <div>
                 <div style={{
-                  background: 'rgba(29,185,84,0.15)', border: '1px solid rgba(29,185,84,0.3)',
-                  padding: '10px 14px', borderRadius: 10, color: '#25d466', fontSize: '0.85rem', fontWeight: 700,
+                  background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)',
+                  padding: '10px 14px', borderRadius: 10, color: '#10b981', fontSize: '0.85rem', fontWeight: 700,
                   marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8
                 }}>
                   <i className="fas fa-trophy" />
@@ -544,32 +552,32 @@ export default function Calculators() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
                   {/* New Regime Card */}
                   <div style={{
-                    background: betterRegime === 'New Tax Regime' ? 'rgba(29,185,84,0.12)' : 'rgba(255,255,255,0.05)',
-                    border: betterRegime === 'New Tax Regime' ? '1.5px solid #1DB954' : '1px solid rgba(255,255,255,0.1)',
+                    background: betterRegime === 'New Tax Regime' ? 'rgba(16,185,129,0.12)' : 'rgba(255,255,255,0.04)',
+                    border: betterRegime === 'New Tax Regime' ? '1.5px solid #10b981' : '1px solid rgba(255,255,255,0.08)',
                     borderRadius: 12, padding: '1.2rem', textAlign: 'center'
                   }}>
                     <div style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase' }}>New Regime</div>
                     <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'white', margin: '8px 0' }}>
                       ₹{Math.round(newTax).toLocaleString('en-IN')}
                     </div>
-                    <div style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>Std Ded: ₹75,000</div>
+                    <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Std Ded: ₹75,000</div>
                   </div>
 
                   {/* Old Regime Card */}
                   <div style={{
-                    background: betterRegime === 'Old Tax Regime' ? 'rgba(29,185,84,0.12)' : 'rgba(255,255,255,0.05)',
-                    border: betterRegime === 'Old Tax Regime' ? '1.5px solid #1DB954' : '1px solid rgba(255,255,255,0.1)',
+                    background: betterRegime === 'Old Tax Regime' ? 'rgba(16,185,129,0.12)' : 'rgba(255,255,255,0.04)',
+                    border: betterRegime === 'Old Tax Regime' ? '1.5px solid #10b981' : '1px solid rgba(255,255,255,0.08)',
                     borderRadius: 12, padding: '1.2rem', textAlign: 'center'
                   }}>
                     <div style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase' }}>Old Regime</div>
                     <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'white', margin: '8px 0' }}>
                       ₹{Math.round(oldTax).toLocaleString('en-IN')}
                     </div>
-                    <div style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>Total Ded: ₹{oldTotalDeductions.toLocaleString('en-IN')}</div>
+                    <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Total Ded: ₹{oldTotalDeductions.toLocaleString('en-IN')}</div>
                   </div>
                 </div>
 
-                <div style={{ fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                <div style={{ fontSize: '0.78rem', color: '#64748b', lineHeight: 1.6, marginBottom: '1.5rem' }}>
                   *Calculations include standard 4% Health & Education cess. High net worth surcharge applies above ₹50 Lakhs.
                 </div>
               </div>
@@ -577,7 +585,7 @@ export default function Calculators() {
               <button
                 onClick={handleShareTax}
                 style={{
-                  width: '100%', padding: '12px', background: '#25d466', color: '#060f22',
+                  width: '100%', padding: '12px', background: '#25d466', color: '#000000',
                   border: 'none', borderRadius: 10, fontWeight: 700, fontSize: '0.9rem',
                   cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                   boxShadow: '0 4px 15px rgba(37,212,102,0.3)'
@@ -594,13 +602,13 @@ export default function Calculators() {
         ══════════════════════════════════════════════════════════════════════════ */}
         {activeCalc === 'startup' && (
           <div style={{
-            background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0',
-            boxShadow: '0 15px 35px rgba(0,0,0,0.06)', overflow: 'hidden',
+            background: '#0d1118', borderRadius: 20, border: '1px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden',
             display: 'grid', gridTemplateColumns: '1.2fr 1fr'
           }}>
             <div style={{ padding: '2.5rem' }}>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0A1F44', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ width: 8, height: 20, background: '#1DB954', borderRadius: 4, display: 'inline-block' }} />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 8, height: 20, background: '#f59e0b', borderRadius: 4, display: 'inline-block' }} />
                 Select Business Entity Type
               </h3>
 
@@ -612,21 +620,21 @@ export default function Calculators() {
                     onClick={() => setEntityType(key)}
                     style={{
                       padding: '12px 14px', borderRadius: 10, cursor: 'pointer',
-                      border: entityType === key ? '2px solid #1DB954' : '1.5px solid #e2e8f0',
-                      background: entityType === key ? 'rgba(29,185,84,0.08)' : 'white',
+                      border: entityType === key ? '2px solid #f59e0b' : '1px solid rgba(255,255,255,0.08)',
+                      background: entityType === key ? 'rgba(245,158,11,0.12)' : '#090a0d',
                       transition: 'all 0.15s'
                     }}
                   >
-                    <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#0A1F44' }}>{val.name}</div>
-                    <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: 4 }}>{val.desc}</div>
+                    <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#ffffff' }}>{val.name}</div>
+                    <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: 4 }}>{val.desc}</div>
                   </div>
                 ))}
               </div>
 
               {/* Directors Counter */}
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: 8 }}>
-                  Number of Directors / Partners: <strong>{directors}</strong>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#94a3b8', marginBottom: 8 }}>
+                  Number of Directors / Partners: <strong style={{ color: 'white' }}>{directors}</strong>
                 </label>
                 <input
                   type="range"
@@ -634,29 +642,29 @@ export default function Calculators() {
                   max="6"
                   value={directors}
                   onChange={e => setDirectors(parseInt(e.target.value))}
-                  style={{ width: '100%', accentColor: '#1DB954' }}
+                  style={{ width: '100%', accentColor: '#f59e0b' }}
                 />
               </div>
 
               {/* Add-on compliance packages */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: 8 }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#94a3b8', marginBottom: 8 }}>
                   Recommended Statutory Bundles
                 </label>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#334155', cursor: 'pointer' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#94a3b8', cursor: 'pointer' }}>
                     <input type="checkbox" checked={addOns.gst} onChange={() => toggleAddOn('gst')} />
                     GST Registration (+₹1,499)
                   </label>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#334155', cursor: 'pointer' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#94a3b8', cursor: 'pointer' }}>
                     <input type="checkbox" checked={addOns.msme} onChange={() => toggleAddOn('msme')} />
                     MSME / Udyam (+₹999)
                   </label>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#334155', cursor: 'pointer' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#94a3b8', cursor: 'pointer' }}>
                     <input type="checkbox" checked={addOns.startupIndia} onChange={() => toggleAddOn('startupIndia')} />
                     Startup India (+₹2,999)
                   </label>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#334155', cursor: 'pointer' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#94a3b8', cursor: 'pointer' }}>
                     <input type="checkbox" checked={addOns.trademark} onChange={() => toggleAddOn('trademark')} />
                     Trademark Filing (+₹4,999)
                   </label>
@@ -665,7 +673,7 @@ export default function Calculators() {
             </div>
 
             {/* Quotation Preview Card */}
-            <div style={{ background: '#0A1F44', padding: '2.5rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ background: '#11141c', padding: '2.5rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderLeft: '1px solid rgba(255,255,255,0.08)' }}>
               <div>
                 <span style={{ fontSize: '0.85rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 700 }}>
                   Estimated Package Quotation

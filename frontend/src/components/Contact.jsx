@@ -128,28 +128,26 @@ export default function Contact({ initialService = '' }) {
 
   const inputStyle = {
     width: '100%', padding: '13px 16px',
-    borderRadius: 8, border: '1.5px solid rgba(255,255,255,0.18)',
-    background: 'rgba(255,255,255,0.08)', color: 'white',
+    borderRadius: 10, border: '1.5px solid rgba(255,255,255,0.12)',
+    background: '#090a0d', color: 'white',
     fontSize: '0.9rem', outline: 'none', fontFamily: 'Inter, sans-serif',
     transition: 'border-color 0.2s', marginBottom: '1rem',
   }
 
   return (
-    <section id="contact" style={{ background: '#0A1F44', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: -200, right: -200, width: 500, height: 500, background: 'rgba(29,185,84,0.08)', borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none' }} />
-
+    <section id="contact" style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)', position: 'relative', overflow: 'hidden', padding: '5rem 0' }}>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'start' }}>
 
           {/* ── Left Details ── */}
           <div>
-            <div className="section-badge" style={{ background: 'rgba(29,185,84,0.12)', color: '#25d466', borderColor: 'rgba(29,185,84,0.3)' }}>
+            <div className="section-badge" style={{ background: 'rgba(56,189,248,0.12)', color: '#38bdf8', borderColor: 'rgba(56,189,248,0.25)' }}>
               <i className="fas fa-envelope" /> Contact & Consultations
             </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem,4vw,2.8rem)', fontWeight: 800, color: 'white', marginBottom: '1rem', lineHeight: 1.2 }}>
+            <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(2rem,4vw,2.8rem)', fontWeight: 800, color: 'white', marginBottom: '1rem', lineHeight: 1.2, letterSpacing: '-0.5px' }}>
               Let's Discuss Your Compliance & Growth
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
+            <p style={{ color: '#94a3b8', lineHeight: 1.8, marginBottom: '2.5rem' }}>
               Whether you need regular monthly accounting, filing a new company incorporation, or assistance with a statutory tax notice — our dedicated advisory team is here for you.
             </p>
 
@@ -160,84 +158,84 @@ export default function Contact({ initialService = '' }) {
                 { icon: 'fa-envelope',label: 'Official Email · Response within 24 hrs', value: 'hello@cloudledger.in', href: 'mailto:hello@cloudledger.in' },
               ].map(item => (
                 <div key={item.icon} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                  <div style={{ width: 44, height: 44, background: 'rgba(29,185,84,0.12)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className={`fas ${item.icon}`} style={{ color: '#25d466', fontSize: '1.1rem' }} />
+                  <div style={{ width: 44, height: 44, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className={`fas ${item.icon}`} style={{ color: '#38bdf8', fontSize: '1.1rem' }} />
                   </div>
                   <div>
-                    <a href={item.href} style={{ color: 'rgba(255,255,255,0.9)', textDecoration: 'none', fontSize: '0.92rem', fontWeight: 600 }}>{item.value}</a>
-                    <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.75rem', marginTop: 2 }}>{item.label}</div>
+                    <a href={item.href} style={{ color: '#ffffff', textDecoration: 'none', fontSize: '0.92rem', fontWeight: 600 }}>{item.value}</a>
+                    <div style={{ color: '#64748b', fontSize: '0.75rem', marginTop: 2 }}>{item.label}</div>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Direct WhatsApp Callout */}
-            <div style={{ background: 'rgba(37,212,102,0.09)', border: '1px solid rgba(37,212,102,0.25)', borderRadius: 18, padding: '2rem', textAlign: 'center' }}>
+            <div style={{ background: '#0d1118', border: '1px solid rgba(37,212,102,0.25)', borderRadius: 20, padding: '2rem', textAlign: 'center' }}>
               <div style={{ fontSize: '2.4rem', marginBottom: '0.6rem' }}>💬</div>
-              <div style={{ color: 'white', fontWeight: 800, fontSize: '1.15rem', marginBottom: '0.4rem' }}>Direct WhatsApp Support</div>
-              <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.85rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
+              <div style={{ color: 'white', fontWeight: 800, fontSize: '1.15rem', marginBottom: '0.4rem' }}>Direct WhatsApp Support Desk</div>
+              <div style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
                 Need instant support or document review? Start a live chat directly with our compliance desk.
               </div>
-              <a href={`https://wa.me/${WA_NUMBER}?text=Hello%20Cloud%20Ledger!%20I%20have%20an%20urgent%20enquiry.`} target="_blank" rel="noreferrer" className="btn btn-whatsapp btn-lg" style={{ display: 'inline-flex' }}>
+              <a href={`https://wa.me/${WA_NUMBER}?text=Hello%20Cloud%20Ledger!%20I%20have%20an%20urgent%20enquiry.`} target="_blank" rel="noreferrer" className="btn btn-whatsapp btn-lg" style={{ display: 'inline-flex', padding: '12px 28px', borderRadius: 9999 }}>
                 <i className="fab fa-whatsapp" style={{ fontSize: '1.2rem' }} /> Start WhatsApp Chat
               </a>
             </div>
           </div>
 
           {/* ── Right Form ── */}
-          <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 24, padding: '2.5rem', backdropFilter: 'blur(10px)' }}>
+          <div style={{ background: '#0d1118', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24, padding: '2.5rem', boxShadow: '0 20px 50px rgba(0,0,0,0.6)' }}>
             <div style={{ color: 'white', fontWeight: 800, fontSize: '1.35rem', marginBottom: '0.5rem' }}>Send an Enquiry</div>
-            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.82rem', marginBottom: '1.75rem' }}>
+            <div style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '1.75rem' }}>
               Fill in your requirement below and our team will get in touch with you.
             </div>
 
             <form onSubmit={handleSubmit}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                 <div>
-                  <label style={{ display: 'block', color: 'rgba(255,255,255,0.8)', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Your Full Name *</label>
+                  <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Your Full Name *</label>
                   <input name="name" value={form.name} onChange={handleChange} placeholder="e.g. Rahul Sharma" style={{ ...inputStyle, marginBottom: 0 }} required />
                 </div>
                 <div>
-                  <label style={{ display: 'block', color: 'rgba(255,255,255,0.8)', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Phone / WhatsApp *</label>
+                  <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Phone / WhatsApp *</label>
                   <input name="phone" value={form.phone} onChange={handleChange} placeholder="e.g. 7827225372" style={{ ...inputStyle, marginBottom: 0 }} required />
                 </div>
               </div>
 
               <div>
-                <label style={{ display: 'block', color: 'rgba(255,255,255,0.8)', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Email Address *</label>
+                <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Email Address *</label>
                 <input name="email" value={form.email} onChange={handleChange} type="email" placeholder="e.g. rahul@company.com" style={inputStyle} required />
               </div>
 
               <div>
-                <label style={{ display: 'block', color: 'rgba(255,255,255,0.8)', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Select Service Category</label>
-                <select name="service" value={form.service} onChange={handleChange} style={{ ...inputStyle, cursor: 'pointer', background: 'rgba(10,31,68,0.9)' }}>
-                  <option value="">Select Service Category (optional)</option>
-                  {SERVICE_CATEGORIES.map(s => <option key={s} value={s}>{s}</option>)}
+                <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Select Service Category</label>
+                <select name="service" value={form.service} onChange={handleChange} style={{ ...inputStyle, cursor: 'pointer', background: '#090a0d', color: 'white' }}>
+                  <option value="" style={{ background: '#0d1118' }}>Select Service Category (optional)</option>
+                  {SERVICE_CATEGORIES.map(s => <option key={s} value={s} style={{ background: '#0d1118' }}>{s}</option>)}
                 </select>
               </div>
 
               <div>
-                <label style={{ display: 'block', color: 'rgba(255,255,255,0.8)', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Requirement Details</label>
+                <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Requirement Details</label>
                 <textarea name="message" value={form.message} onChange={handleChange} placeholder="Tell us briefly about your business and requirement..." rows={3}
                   style={{ ...inputStyle, resize: 'vertical' }} />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: '0.5rem' }}>
-                <button type="submit" disabled={loading} className="btn btn-green btn-lg" style={{ width: '100%', justifyContent: 'center' }}>
+                <button type="submit" disabled={loading} className="btn btn-white" style={{ width: '100%', height: 48, borderRadius: 9999, justifyContent: 'center' }}>
                   {loading
                     ? <><i className="fas fa-spinner fa-spin" /> Submitting...</>
                     : <><i className="fas fa-paper-plane" /> Submit Online Enquiry</>
                   }
                 </button>
 
-                <button type="button" onClick={handleWhatsAppSubmit} className="btn btn-whatsapp" style={{ width: '100%', justifyContent: 'center', padding: '12px' }}>
+                <button type="button" onClick={handleWhatsAppSubmit} className="btn btn-whatsapp" style={{ width: '100%', height: 48, borderRadius: 9999, justifyContent: 'center', padding: '12px' }}>
                   <i className="fab fa-whatsapp" style={{ fontSize: '1.1rem' }} /> Or Submit Directly to WhatsApp
                 </button>
               </div>
 
-              <div style={{ textAlign: 'center', marginTop: '1.25rem', color: 'rgba(255,255,255,0.4)', fontSize: '0.72rem', lineHeight: 1.5 }}>
+              <div style={{ textAlign: 'center', marginTop: '1.25rem', color: '#64748b', fontSize: '0.72rem', lineHeight: 1.5 }}>
                 <i className="fas fa-shield-alt" style={{ marginRight: 4 }} />
-                Your data is kept strictly confidential. We never share your phone or email.
+                Your data is kept strictly confidential with 256-bit encryption. We never share your phone or email.
               </div>
             </form>
           </div>

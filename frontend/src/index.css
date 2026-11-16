@@ -188,25 +188,6 @@ section { padding: 90px 1.5rem; background: #000000; }
 }
 .btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,212,102,0.45); }
 
-/* Theme Selector Floating Bar */
-.theme-switcher-pill {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  z-index: 999;
-  background: rgba(10,31,68,0.92);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 100px;
-  padding: 6px 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  font-size: 0.78rem;
-  color: white;
-}
-
 /* Global Keyframes */
 @keyframes pulseDot {
   0%, 100% {

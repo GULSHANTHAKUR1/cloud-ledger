@@ -192,26 +192,33 @@ export default function Knowledge() {
   }
 
   return (
-    <section id="knowledge" style={{ background: '#f8fafc', padding: '90px 1.5rem', borderTop: '1px solid #e2e8f0' }}>
+    <section id="knowledge" style={{ background: '#000000', padding: '90px 1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div className="container" style={{ maxWidth: 1200, margin: '0 auto' }}>
 
         {/* Section Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem', marginBottom: '2.5rem' }}>
           <div>
-            <div className="section-badge">
+            <div className="section-badge" style={{ background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.25)', color: '#38bdf8' }}>
               <i className="fas fa-newspaper" /> Daily Regulatory Updates & Knowledge Centre
             </div>
-            <h2 className="section-title">
+            <h2 className="section-title" style={{ color: '#ffffff' }}>
               Statutory Circulars &<br />
-              <span className="accent">Daily Compliance Briefs</span>
+              <span style={{
+                background: 'linear-gradient(135deg, #38bdf8 0%, #10b981 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
+              }}>
+                Daily Compliance Briefs
+              </span>
             </h2>
-            <p className="section-desc">
+            <p className="section-desc" style={{ color: '#94a3b8' }}>
               Published directly by our team of Chartered Accountants, Company Secretaries, and Legal Advocates to keep your business ahead of regulatory shifts.
             </p>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ fontSize: '0.8rem', color: '#16a34a', fontWeight: 700, background: 'rgba(22,163,74,0.1)', padding: '6px 14px', borderRadius: 100 }}>
+            <span style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 700, background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.25)', padding: '6px 14px', borderRadius: 100 }}>
               ● Live Daily Feed Active
             </span>
           </div>
@@ -226,10 +233,10 @@ export default function Knowledge() {
               style={{
                 padding: '8px 16px', borderRadius: 100, cursor: 'pointer',
                 fontWeight: 700, fontSize: '0.8rem', transition: 'all 0.2s',
-                background: selectedCat === cat ? '#0A1F44' : 'white',
-                color: selectedCat === cat ? 'white' : '#64748b',
-                boxShadow: selectedCat === cat ? '0 4px 12px rgba(10,31,68,0.2)' : '0 2px 4px rgba(0,0,0,0.04)',
-                border: selectedCat === cat ? '1px solid #0A1F44' : '1px solid #e2e8f0'
+                background: selectedCat === cat ? '#1e60ff' : 'rgba(255,255,255,0.04)',
+                color: selectedCat === cat ? '#ffffff' : '#94a3b8',
+                boxShadow: selectedCat === cat ? '0 4px 15px rgba(30,96,255,0.4)' : 'none',
+                border: selectedCat === cat ? '1px solid #1e60ff' : '1px solid rgba(255,255,255,0.1)'
               }}
             >
               {cat === 'all' ? 'All Updates' : cat}
@@ -240,62 +247,62 @@ export default function Knowledge() {
         {/* Articles Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
           {filtered.map((art) => {
-            const badgeColor = art.catColor || '#16a34a'
-            const barColor = art.accentColor || '#1DB954'
+            const badgeColor = art.catColor || '#10b981'
+            const barColor = art.accentColor || '#1e60ff'
             return (
               <div
                 key={art.id}
                 onClick={() => setActiveArticle(art)}
                 style={{
-                  background: 'white', borderRadius: 16, overflow: 'hidden',
-                  border: '1.5px solid #e2e8f0', transition: 'all 0.25s', cursor: 'pointer',
+                  background: '#0d1118', borderRadius: 16, overflow: 'hidden',
+                  border: '1px solid rgba(255,255,255,0.08)', transition: 'all 0.25s', cursor: 'pointer',
                   display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.03)'
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.4)'
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = '#0A1F44'
+                  e.currentTarget.style.borderColor = 'rgba(56,189,248,0.4)'
                   e.currentTarget.style.transform = 'translateY(-4px)'
-                  e.currentTarget.style.boxShadow = '0 15px 30px rgba(10,31,68,0.08)'
+                  e.currentTarget.style.boxShadow = '0 15px 30px rgba(0,0,0,0.6)'
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = '#e2e8f0'
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
                   e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.03)'
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.4)'
                 }}
               >
                 <div>
-                  <div style={{ height: 4, background: `linear-gradient(90deg, ${barColor}, #0A1F44)` }} />
+                  <div style={{ height: 4, background: `linear-gradient(90deg, ${barColor}, #1e60ff)` }} />
                   <div style={{ padding: '1.5rem 1.5rem 1rem 1.5rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
                       <span style={{
-                        background: `${badgeColor}15`, color: badgeColor,
+                        background: `${badgeColor}20`, color: badgeColor,
                         padding: '3px 10px', borderRadius: 100, fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase'
                       }}>
                         {art.cat}
                       </span>
-                      <span style={{ color: '#94a3b8', fontSize: '0.75rem', fontWeight: 500 }}>
+                      <span style={{ color: '#64748b', fontSize: '0.75rem', fontWeight: 500 }}>
                         <i className="far fa-calendar-alt" style={{ marginRight: 4 }} />
                         {art.date}
                       </span>
                     </div>
 
-                    <h3 style={{ fontWeight: 800, color: '#0A1F44', fontSize: '1rem', lineHeight: 1.4, marginBottom: '0.75rem' }}>
+                    <h3 style={{ fontWeight: 800, color: '#ffffff', fontSize: '1rem', lineHeight: 1.4, marginBottom: '0.75rem' }}>
                       {art.title}
                     </h3>
-                    <p style={{ color: '#64748b', fontSize: '0.84rem', lineHeight: 1.6, margin: 0 }}>
+                    <p style={{ color: '#94a3b8', fontSize: '0.84rem', lineHeight: 1.6, margin: 0 }}>
                       {art.excerpt}
                     </p>
                   </div>
                 </div>
 
                 <div style={{
-                  padding: '1rem 1.5rem', background: '#f8fafc', borderTop: '1px solid #f1f5f9',
+                  padding: '1rem 1.5rem', background: '#090a0d', borderTop: '1px solid rgba(255,255,255,0.06)',
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between'
                 }}>
-                  <span style={{ color: '#475569', fontSize: '0.75rem', fontWeight: 600 }}>
-                    <i className="fas fa-feather-alt" style={{ marginRight: 4, color: '#1DB954' }} /> {art.author || 'CA Desk'}
+                  <span style={{ color: '#64748b', fontSize: '0.75rem', fontWeight: 600 }}>
+                    <i className="fas fa-feather-alt" style={{ marginRight: 4, color: '#10b981' }} /> {art.author || 'CA Desk'}
                   </span>
-                  <span style={{ color: '#16a34a', fontSize: '0.78rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <span style={{ color: '#38bdf8', fontSize: '0.78rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4 }}>
                     Read Complete Brief <i className="fas fa-arrow-right" style={{ fontSize: '0.7rem' }} />
                   </span>
                 </div>
@@ -309,21 +316,23 @@ export default function Knowledge() {
       {/* ── MODAL: FULL ARTICLE READER ── */}
       {activeArticle && (
         <div style={{
-          position: 'fixed', inset: 0, background: 'rgba(6,15,34,0.75)', backdropFilter: 'blur(8px)',
+          position: 'fixed', inset: 0, background: 'rgba(0, 0, 0, 0.85)', backdropFilter: 'blur(10px)',
           zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem'
         }}>
           <div style={{
-            background: 'white', borderRadius: 20, width: '100%', maxWidth: 720, maxHeight: '88vh',
-            display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.3)'
+            background: '#121316', borderRadius: 20, width: '100%', maxWidth: 720, maxHeight: '88vh',
+            display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+            border: '1px solid rgba(255,255,255,0.12)'
           }}>
             {/* Modal Top Header */}
             <div style={{
-              padding: '1.25rem 2rem', background: '#0A1F44', color: 'white',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between'
+              padding: '1.25rem 2rem', background: '#0d1118', color: 'white',
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              borderBottom: '1px solid rgba(255,255,255,0.08)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <span style={{
-                  background: 'rgba(29,185,84,0.2)', color: '#25d466',
+                  background: 'rgba(16,185,129,0.18)', color: '#10b981',
                   padding: '3px 10px', borderRadius: 100, fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase'
                 }}>
                   {activeArticle.cat}
@@ -341,20 +350,20 @@ export default function Knowledge() {
             </div>
 
             {/* Modal Body */}
-            <div style={{ padding: '2rem', overflowY: 'auto', flex: 1, lineHeight: 1.8, color: '#334155' }}>
-              <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#0A1F44', lineHeight: 1.35, marginBottom: '1rem' }}>
+            <div style={{ padding: '2rem', overflowY: 'auto', flex: 1, lineHeight: 1.8, color: '#cbd5e1' }}>
+              <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.35, marginBottom: '1rem' }}>
                 {activeArticle.title}
               </h2>
 
               <div style={{
-                background: '#f8fafc', borderLeft: '4px solid #1DB954',
+                background: '#090a0d', borderLeft: '4px solid #10b981',
                 padding: '12px 16px', borderRadius: '0 8px 8px 0', marginBottom: '1.5rem',
-                fontSize: '0.9rem', fontStyle: 'italic', color: '#475569'
+                fontSize: '0.9rem', fontStyle: 'italic', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.06)'
               }}>
                 "{activeArticle.excerpt}"
               </div>
 
-              <div style={{ fontSize: '0.92rem', whiteSpace: 'pre-line', marginBottom: '2rem' }}>
+              <div style={{ fontSize: '0.92rem', whiteSpace: 'pre-line', marginBottom: '2rem', color: '#cbd5e1' }}>
                 {activeArticle.content || activeArticle.excerpt}
               </div>
 

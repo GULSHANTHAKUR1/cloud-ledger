@@ -28,22 +28,16 @@ export default function Hero() {
       {/* ── HERO ── */}
       <section id="hero" style={{
         minHeight: '100vh',
-        background: 'radial-gradient(circle at 50% 20%, rgba(30, 96, 255, 0.12) 0%, #050608 65%, #000000 100%)',
+        background: 'radial-gradient(circle at 50% 15%, rgba(30, 96, 255, 0.16) 0%, rgba(16, 185, 129, 0.05) 35%, #050608 70%, #000000 100%)',
         display: 'flex', alignItems: 'center',
         paddingTop: 80, paddingBottom: 60, position: 'relative', overflow: 'hidden',
       }}>
-        {/* Animated Background orbs & Grid */}
-        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-          <div className="hero-orb hero-orb-1" style={{ position: 'absolute', width: 550, height: 550, borderRadius: '50%', background: '#1e60ff', filter: 'blur(120px)', opacity: 0.12, top: -120, right: -120 }} />
-          <div className="hero-orb hero-orb-2" style={{ position: 'absolute', width: 450, height: 450, borderRadius: '50%', background: '#10b981', filter: 'blur(120px)', opacity: 0.1, bottom: -150, left: -100 }} />
-          <div className="hero-orb hero-orb-3" style={{ position: 'absolute', width: 300, height: 300, borderRadius: '50%', background: '#8b5cf6', filter: 'blur(90px)', opacity: 0.08, top: '40%', left: '40%' }} />
-          
-          <div style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }} />
-        </div>
+        {/* Subtle high-performance grid pattern without heavy blur orbs */}
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 2, padding: '1rem 1.5rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '3.5rem', alignItems: 'center' }} className="hero-grid-layout">
@@ -83,13 +77,13 @@ export default function Hero() {
                 Experience simpler, smarter invoicing, tax compliance, expense management, payroll, and accounting — unified in one automated dashboard with 100% data confidentiality.
               </p>
 
-              {/* CTAs matching ledgers.cloud */}
+              {/* CTAs */}
               <div style={{ display: 'flex', gap: '0.9rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
                 <a href="#services" className="btn btn-white" style={{ padding: '13px 28px', fontSize: '0.92rem' }}>
                   Get Started →
                 </a>
                 <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-blue" style={{ padding: '13px 24px', fontSize: '0.92rem' }}>
-                  Talk to Agent ↗
+                  <i className="fab fa-whatsapp" style={{ marginRight: 6 }} /> WhatsApp Us
                 </a>
                 <a href="#calculators" className="btn" style={{ background: 'rgba(255,255,255,0.06)', color: 'white', border: '1px solid rgba(255,255,255,0.15)', padding: '13px 20px' }}>
                   <i className="fas fa-calculator" style={{ color: '#38bdf8' }} /> Tax Calculator
@@ -271,10 +265,6 @@ export default function Hero() {
         </div>
 
         <style>{`
-          .hero-orb-1 { animation: floatOrb 9s ease-in-out infinite; }
-          .hero-orb-2 { animation: floatOrb 11s ease-in-out infinite -3s; }
-          .hero-orb-3 { animation: floatOrb 8s ease-in-out infinite -5s; }
-
           @media (max-width: 960px) {
             .hero-grid-layout { grid-template-columns: 1fr !important; gap: 3rem !important; }
             .hero-visual-card { display: none !important; }
