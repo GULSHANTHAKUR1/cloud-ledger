@@ -101,9 +101,9 @@ export default function Hero() {
                     style={{
                       width: '100%', padding: '16px 60px 16px 20px',
                       borderRadius: 14, border: '1.5px solid rgba(255,255,255,0.12)',
-                      background: 'rgba(255,255,255,0.05)', color: 'white',
-                      fontSize: '0.95rem', backdropFilter: 'blur(10px)', outline: 'none',
-                      transition: 'all 0.3s', fontFamily: 'Inter, sans-serif',
+                      background: '#090a0d', color: 'white',
+                      fontSize: '0.95rem', outline: 'none',
+                      transition: 'border-color 0.2s', fontFamily: 'Inter, sans-serif',
                       boxShadow: '0 8px 32px rgba(0,0,0,0.5)'
                     }}
                   />
@@ -175,10 +175,9 @@ export default function Hero() {
 
               {/* Main Frosted Glass Compliance Standards Card */}
               <div style={{
-                background: 'rgba(14, 17, 24, 0.85)',
+                background: '#0e1118',
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 borderRadius: 24, padding: '2rem',
-                backdropFilter: 'blur(20px)',
                 boxShadow: '0 30px 60px rgba(0,0,0,0.7)',
                 position: 'relative'
               }}>

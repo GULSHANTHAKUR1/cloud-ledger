@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import './theme.css'
@@ -20,14 +20,21 @@ import WhatsAppFloat from './components/WhatsAppFloat'
 import EnquiryPopup from './components/EnquiryPopup'
 import Calculators from './components/Calculators'
 
-// Auth pages
-import LoginPage from './pages/LoginPage'
-import NotFound from './pages/NotFound'
+// Auth & Dashboard pages (lazy loaded to make initial homepage load blazing fast)
+const LoginPage = lazy(() => import('./pages/LoginPage'))
+const NotFound = lazy(() => import('./pages/NotFound'))
+const AdminDashboard = lazy(() => import('./pages/dashboard/AdminDashboard'))
+const StaffDashboard = lazy(() => import('./pages/dashboard/StaffDashboard'))
+const ClientDashboard = lazy(() => import('./pages/dashboard/ClientDashboard'))
 
-// Dashboard pages (private)
-import AdminDashboard from './pages/dashboard/AdminDashboard'
-import StaffDashboard from './pages/dashboard/StaffDashboard'
-import ClientDashboard from './pages/dashboard/ClientDashboard'
+const LoadingFallback = () => (
+  <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000000' }}>
+    <div style={{ textAlign: 'center' }}>
+      <div style={{ width: 36, height: 36, border: '3px solid rgba(255,255,255,0.1)', borderTopColor: '#1e60ff', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 12px' }} />
+      <div style={{ color: '#94a3b8', fontSize: '0.84rem' }}>Loading...</div>
+    </div>
+  </div>
+)
 
 // ── Public site layout ────────────────────────────────────────────────────────
 function PublicLayout() {
@@ -83,35 +90,37 @@ export default function App() {
             style: { fontFamily: 'Inter, sans-serif', fontSize: '0.88rem' }
           }}
         />
-        <Routes>
-          {/* Public Website */}
-          <Route path="/" element={<PublicLayout />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/enquiries" element={<AdminDashboard />} />
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            {/* Public Website */}
+            <Route path="/" element={<PublicLayout />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/enquiries" element={<AdminDashboard />} />
 
-          {/* Admin Dashboard (Super Admin & Admin) */}
-          <Route path="/dashboard/admin" element={
-            <ProtectedRoute allowedRoles={['super_admin', 'admin']}>
-              <AdminDashboard />
-            </ProtectedRoute>
-          } />
+            {/* Admin Dashboard (Super Admin & Admin) */}
+            <Route path="/dashboard/admin" element={
+              <ProtectedRoute allowedRoles={['super_admin', 'admin']}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
 
-          {/* Staff Dashboard */}
-          <Route path="/dashboard/staff" element={
-            <ProtectedRoute allowedRoles={['super_admin', 'admin', 'staff']}>
-              <StaffDashboard />
-            </ProtectedRoute>
-          } />
+            {/* Staff Dashboard */}
+            <Route path="/dashboard/staff" element={
+              <ProtectedRoute allowedRoles={['super_admin', 'admin', 'staff']}>
+                <StaffDashboard />
+              </ProtectedRoute>
+            } />
 
-          {/* Client Portal */}
-          <Route path="/dashboard/client" element={
-            <ProtectedRoute allowedRoles={['client']}>
-              <ClientDashboard />
-            </ProtectedRoute>
-          } />
+            {/* Client Portal */}
+            <Route path="/dashboard/client" element={
+              <ProtectedRoute allowedRoles={['client']}>
+                <ClientDashboard />
+              </ProtectedRoute>
+            } />
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </Router>
     </AuthProvider>
   )

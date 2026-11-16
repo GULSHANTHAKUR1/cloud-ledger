@@ -16,22 +16,29 @@ export default function EnquiryPopup() {
   })
 
   useEffect(() => {
-    // Pop up promptly when the website is opened
-    const timer = setTimeout(() => {
-      setIsOpen(true)
-    }, 800)
+    // Check if dismissed in this session
+    const dismissed = sessionStorage.getItem('cl_popup_dismissed')
+    let timer = null
+
+    if (!dismissed) {
+      // Pop up smoothly after page has finished loading (2.8 seconds)
+      timer = setTimeout(() => {
+        setIsOpen(true)
+      }, 2800)
+    }
 
     const handleOpenEnquiry = () => setIsOpen(true)
     window.addEventListener('open-enquiry-popup', handleOpenEnquiry)
 
     return () => {
-      clearTimeout(timer)
+      if (timer) clearTimeout(timer)
       window.removeEventListener('open-enquiry-popup', handleOpenEnquiry)
     }
   }, [])
 
   const handleClose = () => {
     setIsOpen(false)
+    sessionStorage.setItem('cl_popup_dismissed', 'true')
   }
 
   const handleChange = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }))
@@ -99,9 +106,9 @@ export default function EnquiryPopup() {
   return (
     <div style={{
       position: 'fixed', inset: 0, zIndex: 99999,
-      background: 'rgba(0, 0, 0, 0.85)', backdropFilter: 'blur(10px)',
+      background: 'rgba(0, 0, 0, 0.82)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      padding: '1.25rem', animation: 'fadeIn 0.3s ease'
+      padding: '1.25rem', animation: 'fadeIn 0.25s ease'
     }} onClick={handleClose}>
       
       <div style={{

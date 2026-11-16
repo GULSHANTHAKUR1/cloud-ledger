@@ -168,18 +168,6 @@ export default function Contact({ initialService = '' }) {
                 </div>
               ))}
             </div>
-
-            {/* Direct WhatsApp Callout */}
-            <div style={{ background: '#0d1118', border: '1px solid rgba(37,212,102,0.25)', borderRadius: 20, padding: '2rem', textAlign: 'center' }}>
-              <div style={{ fontSize: '2.4rem', marginBottom: '0.6rem' }}>💬</div>
-              <div style={{ color: 'white', fontWeight: 800, fontSize: '1.15rem', marginBottom: '0.4rem' }}>Direct WhatsApp Support Desk</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
-                Need instant support or document review? Start a live chat directly with our compliance desk.
-              </div>
-              <a href={`https://wa.me/${WA_NUMBER}?text=Hello%20Cloud%20Ledger!%20I%20have%20an%20urgent%20enquiry.`} target="_blank" rel="noreferrer" className="btn btn-whatsapp btn-lg" style={{ display: 'inline-flex', padding: '12px 28px', borderRadius: 9999 }}>
-                <i className="fab fa-whatsapp" style={{ fontSize: '1.2rem' }} /> Start WhatsApp Chat
-              </a>
-            </div>
           </div>
 
           {/* ── Right Form ── */}
