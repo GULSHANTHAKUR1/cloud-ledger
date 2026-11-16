@@ -33,7 +33,7 @@ const FEATURES_DATA = [
     badge: 'Zero Penalties',
     title: 'GST & Tax Compliance',
     description: 'Complete statutory filing for GSTR-1, GSTR-3B, TDS, and Corporate ITR with proactive ITC mismatch detection to eliminate penalties.',
-    points: ['GSTR-1 & 3B Direct Sync', 'ITC Mismatch Detection', 'Certified CA & CS Oversight'],
+    points: ['GSTR-1 & 3B Direct Sync', 'ITC Mismatch Detection', 'Multi-Tier Regulatory Oversight'],
     actionText: 'Browse Compliance',
     actionHref: '#services'
   },
@@ -53,8 +53,8 @@ const FEATURES_DATA = [
 
 export default function Features({ features = FEATURES_DATA } = {}) {
   const displayFeatures = features && features.length > 0 ? features : FEATURES_DATA
-  const [activeTab, setActiveTab] = React.useState('Invoicing')
-  const tabs = ['Invoicing', 'GST Filing', 'Payroll', 'Bank Reconciliation', 'Expense Management']
+  const [activeTab, setActiveTab] = React.useState('Tax & GST Filings')
+  const tabs = ['Tax & GST Filings', 'Company & MCA Governance', 'Accounting & Bookkeeping', 'Audits & Internal Controls', 'Secure Client Vault']
 
   return (
     <section id="features" style={{

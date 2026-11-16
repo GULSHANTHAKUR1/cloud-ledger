@@ -274,13 +274,12 @@ export default function Calculators() {
             CALCULATOR 1: GST CALCULATOR
         ══════════════════════════════════════════════════════════════════════════ */}
         {activeCalc === 'gst' && (
-          <div style={{
+          <div className="calculator-card-grid" style={{
             background: '#0d1118', borderRadius: 20, border: '1px solid rgba(255,255,255,0.1)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden',
-            display: 'grid', gridTemplateColumns: '1.2fr 1fr'
+            boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden'
           }}>
             {/* Input Controls */}
-            <div style={{ padding: '2.5rem' }}>
+            <div className="calc-panel">
               <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{ width: 8, height: 20, background: '#10b981', borderRadius: 4, display: 'inline-block' }} />
                 GST Parameters & Slabs
@@ -400,7 +399,7 @@ export default function Calculators() {
             </div>
 
             {/* Results Output Card */}
-            <div style={{ background: '#11141c', padding: '2.5rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderLeft: '1px solid rgba(255,255,255,0.08)' }}>
+            <div className="calc-panel calc-results-panel" style={{ background: '#11141c', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
                   <span style={{ fontSize: '0.85rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 700 }}>
@@ -459,7 +458,7 @@ export default function Calculators() {
                   boxShadow: '0 4px 15px rgba(37,212,102,0.3)', transition: 'all 0.2s'
                 }}
               >
-                <i className="fab fa-whatsapp" style={{ fontSize: '1.1rem' }} /> Share & Consult CA on WhatsApp
+                <i className="fab fa-whatsapp" style={{ fontSize: '1.1rem' }} /> Share & Consult Advisory Desk on WhatsApp
               </button>
             </div>
           </div>
@@ -469,13 +468,12 @@ export default function Calculators() {
             CALCULATOR 2: INCOME TAX COMPARISON (NEW VS OLD)
         ══════════════════════════════════════════════════════════════════════════ */}
         {activeCalc === 'tax' && (
-          <div style={{
+          <div className="calculator-card-grid" style={{
             background: '#0d1118', borderRadius: 20, border: '1px solid rgba(255,255,255,0.1)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden',
-            display: 'grid', gridTemplateColumns: '1.1fr 1fr'
+            boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden'
           }}>
             {/* Income Inputs */}
-            <div style={{ padding: '2.5rem' }}>
+            <div className="calc-panel">
               <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{ width: 8, height: 20, background: '#10b981', borderRadius: 4, display: 'inline-block' }} />
                 Annual Income & Deductions (FY 24-25)
@@ -538,7 +536,7 @@ export default function Calculators() {
             </div>
 
             {/* Side-by-Side Regime Comparison */}
-            <div style={{ background: '#11141c', padding: '2.5rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderLeft: '1px solid rgba(255,255,255,0.08)' }}>
+            <div className="calc-panel calc-results-panel" style={{ background: '#11141c', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
                 <div style={{
                   background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)',
@@ -591,7 +589,7 @@ export default function Calculators() {
                   boxShadow: '0 4px 15px rgba(37,212,102,0.3)'
                 }}
               >
-                <i className="fab fa-whatsapp" style={{ fontSize: '1.1rem' }} /> Book Free CA Tax Consultation
+                <i className="fab fa-whatsapp" style={{ fontSize: '1.1rem' }} /> Book Free Tax Consultation
               </button>
             </div>
           </div>
@@ -601,12 +599,11 @@ export default function Calculators() {
             CALCULATOR 3: STARTUP INCORPORATION ESTIMATOR
         ══════════════════════════════════════════════════════════════════════════ */}
         {activeCalc === 'startup' && (
-          <div style={{
+          <div className="calculator-card-grid" style={{
             background: '#0d1118', borderRadius: 20, border: '1px solid rgba(255,255,255,0.1)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden',
-            display: 'grid', gridTemplateColumns: '1.2fr 1fr'
+            boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden'
           }}>
-            <div style={{ padding: '2.5rem' }}>
+            <div className="calc-panel">
               <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{ width: 8, height: 20, background: '#f59e0b', borderRadius: 4, display: 'inline-block' }} />
                 Select Business Entity Type
@@ -673,7 +670,7 @@ export default function Calculators() {
             </div>
 
             {/* Quotation Preview Card */}
-            <div style={{ background: '#11141c', padding: '2.5rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderLeft: '1px solid rgba(255,255,255,0.08)' }}>
+            <div className="calc-panel calc-results-panel" style={{ background: '#11141c', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
                 <span style={{ fontSize: '0.85rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 700 }}>
                   Estimated Package Quotation
@@ -717,6 +714,36 @@ export default function Calculators() {
         )}
 
       </div>
+
+      <style>{`
+        .calculator-card-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+        }
+        .calc-panel {
+          padding: 2.5rem;
+        }
+        .calc-results-panel {
+          border-left: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        @media (max-width: 900px) {
+          .calculator-card-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .calc-results-panel {
+            border-left: none !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+          }
+          .calc-panel {
+            padding: 1.5rem !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .calc-panel {
+            padding: 1.25rem !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

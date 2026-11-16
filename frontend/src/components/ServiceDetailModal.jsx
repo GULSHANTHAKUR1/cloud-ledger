@@ -96,7 +96,7 @@ export default function ServiceDetailModal({ service, onClose, onEnquire }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 700, color: '#ffffff', fontSize: '0.88rem', marginBottom: 12 }}>
             <i className="fas fa-tasks" style={{ color: '#10b981' }} /> Step-by-Step Procedure & Timeline
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, textAlign: 'center' }}>
+          <div className="procedure-steps-grid">
             {[
               { step: '1', title: 'Consultation', sub: 'Requirement & Document review' },
               { step: '2', title: 'Filing', sub: 'Application on Govt Portal' },
@@ -132,8 +132,15 @@ export default function ServiceDetailModal({ service, onClose, onEnquire }) {
       <style>{`
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .procedure-steps-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+          text-align: center;
+        }
         @media (max-width: 600px) {
           .modal-grid { grid-template-columns: 1fr !important; }
+          .procedure-steps-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
       `}</style>
     </div>

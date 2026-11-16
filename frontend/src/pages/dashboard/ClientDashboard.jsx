@@ -88,7 +88,7 @@ export default function ClientDashboard() {
       urgency: newRequest.urgency,
       status: 'pending',
       assignedTo: 'admin@cloudledger.in',
-      assignedToName: 'Operations CA Desk',
+      assignedToName: 'Operations Compliance Desk',
       createdAt: new Date().toISOString()
     }
 
@@ -97,14 +97,14 @@ export default function ClientDashboard() {
         ...payload,
         createdAt: serverTimestamp()
       })
-      toast.success('Service request submitted to CA Desk!')
+      toast.success('Service request submitted to Compliance Desk!')
     } catch (err) {
       console.warn('Saving locally due to Firestore production rule:', err)
       const existing = JSON.parse(localStorage.getItem(`client_requests_${user.uid}`) || '[]')
       const updated = [{ id: 'req-' + Date.now(), ...payload }, ...existing]
       localStorage.setItem(`client_requests_${user.uid}`, JSON.stringify(updated))
       setRequests(updated)
-      toast.success('Request received! CA Desk will review shortly.')
+      toast.success('Request received! Compliance Desk will review shortly.')
     }
 
     setIsRequestModal(false)
@@ -136,7 +136,7 @@ export default function ClientDashboard() {
 
   const handleWhatsAppHelp = () => {
     const text = encodeURIComponent(
-      `Hello Cloud Ledger CA Desk! I am logged into my Client Portal:\n\n` +
+      `Hello Cloud Ledger Advisory Desk! I am logged into my Client Portal:\n\n` +
       `👤 Name: ${profile?.name || user?.email}\n` +
       `📧 Email: ${user?.email}\n` +
       `📱 Phone: ${profile?.phone || 'Not specified'}\n\n` +
@@ -185,7 +185,7 @@ export default function ClientDashboard() {
               cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6
             }}
           >
-            <i className="fab fa-whatsapp" /> CA Desk Help
+            <i className="fab fa-whatsapp" /> Advisory Desk Help
           </button>
           <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.82rem' }}>
             {profile?.name || user?.email}
@@ -259,7 +259,7 @@ export default function ClientDashboard() {
           <div style={{ background: 'white', padding: '1.2rem', borderRadius: 12, border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.03)' }}>
             <div style={{ color: '#64748b', fontSize: '0.78rem', fontWeight: 600 }}>Active Service Requests</div>
             <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0A1F44', marginTop: 4 }}>{requests.length}</div>
-            <div style={{ fontSize: '0.72rem', color: '#0284c7', marginTop: 4 }}>● Assigned to CA Staff</div>
+            <div style={{ fontSize: '0.72rem', color: '#0284c7', marginTop: 4 }}>● Assigned to Compliance Staff</div>
           </div>
           <div style={{ background: 'white', padding: '1.2rem', borderRadius: 12, border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.03)' }}>
             <div style={{ color: '#64748b', fontSize: '0.78rem', fontWeight: 600 }}>Next Compliance Due</div>
@@ -267,8 +267,8 @@ export default function ClientDashboard() {
             <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: 4 }}>GSTR-3B Monthly Return</div>
           </div>
           <div style={{ background: 'white', padding: '1.2rem', borderRadius: 12, border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.03)' }}>
-            <div style={{ color: '#64748b', fontSize: '0.78rem', fontWeight: 600 }}>Dedicated CA Officer</div>
-            <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#0A1F44', marginTop: 8 }}>Senior CA Desk</div>
+            <div style={{ color: '#64748b', fontSize: '0.78rem', fontWeight: 600 }}>Dedicated Operations Officer</div>
+            <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#0A1F44', marginTop: 8 }}>Senior Compliance Desk</div>
             <div style={{ fontSize: '0.72rem', color: '#16a34a', marginTop: 4 }}>Available on WhatsApp</div>
           </div>
         </div>
@@ -508,7 +508,7 @@ export default function ClientDashboard() {
                   type="submit"
                   style={{ flex: 1.5, padding: '11px', background: '#1DB954', border: 'none', borderRadius: 8, fontWeight: 700, color: 'white', cursor: 'pointer' }}
                 >
-                  Submit to CA Desk
+                  Submit to Compliance Desk
                 </button>
               </div>
             </form>

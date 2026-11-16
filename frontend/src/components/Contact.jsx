@@ -178,7 +178,7 @@ export default function Contact({ initialService = '' }) {
             </div>
 
             <form onSubmit={handleSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }} className="contact-input-row">
                 <div>
                   <label style={{ display: 'block', color: '#94a3b8', fontSize: '0.78rem', fontWeight: 600, marginBottom: 5 }}>Your Full Name *</label>
                   <input name="name" value={form.name} onChange={handleChange} placeholder="e.g. Rahul Sharma" style={{ ...inputStyle, marginBottom: 0 }} required />
@@ -233,6 +233,9 @@ export default function Contact({ initialService = '' }) {
       <style>{`
         @media (max-width: 800px) {
           #contact .container > div { grid-template-columns: 1fr !important; gap: 3rem !important; }
+        }
+        @media (max-width: 520px) {
+          .contact-input-row { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

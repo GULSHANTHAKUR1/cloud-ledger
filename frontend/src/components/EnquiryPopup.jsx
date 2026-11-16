@@ -16,29 +16,22 @@ export default function EnquiryPopup() {
   })
 
   useEffect(() => {
-    // Check if dismissed in this session
-    const dismissed = sessionStorage.getItem('cl_popup_dismissed')
-    let timer = null
-
-    if (!dismissed) {
-      // Pop up smoothly after page has finished loading (2.8 seconds)
-      timer = setTimeout(() => {
-        setIsOpen(true)
-      }, 2800)
-    }
+    // Pop up smoothly after opening the site (1.2 seconds)
+    const timer = setTimeout(() => {
+      setIsOpen(true)
+    }, 1200)
 
     const handleOpenEnquiry = () => setIsOpen(true)
     window.addEventListener('open-enquiry-popup', handleOpenEnquiry)
 
     return () => {
-      if (timer) clearTimeout(timer)
+      clearTimeout(timer)
       window.removeEventListener('open-enquiry-popup', handleOpenEnquiry)
     }
   }, [])
 
   const handleClose = () => {
     setIsOpen(false)
-    sessionStorage.setItem('cl_popup_dismissed', 'true')
   }
 
   const handleChange = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }))
@@ -113,7 +106,8 @@ export default function EnquiryPopup() {
       
       <div style={{
         background: '#121316', borderRadius: 24, maxWidth: 480, width: '100%',
-        overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.8)',
+        maxHeight: '92vh', overflowY: 'auto',
+        boxShadow: '0 30px 80px rgba(0,0,0,0.8)',
         border: '1px solid rgba(255, 255, 255, 0.12)',
         position: 'relative', animation: 'popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
       }} onClick={e => e.stopPropagation()}>
@@ -121,7 +115,7 @@ export default function EnquiryPopup() {
         {/* Top Header */}
         <div style={{
           background: 'radial-gradient(circle at 50% 0%, rgba(30, 96, 255, 0.18) 0%, #0d0f14 70%)',
-          padding: '2rem 2rem 1.5rem', color: 'white', position: 'relative',
+          padding: 'clamp(1.4rem, 4vw, 2rem) clamp(1.2rem, 4vw, 2rem) 1.2rem', color: 'white', position: 'relative',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
         }}>
           {/* Close X */}
@@ -142,7 +136,7 @@ export default function EnquiryPopup() {
             Free Consultation
           </div>
 
-          <h3 style={{ fontSize: '1.45rem', fontWeight: 800, margin: '0 0 6px', color: 'white', lineHeight: 1.25, fontFamily: "'Inter', sans-serif" }}>
+          <h3 style={{ fontSize: 'clamp(1.2rem, 4vw, 1.45rem)', fontWeight: 800, margin: '0 0 6px', color: 'white', lineHeight: 1.25, fontFamily: "'Inter', sans-serif" }}>
             Speak with an Advisory Specialist
           </h3>
           <p style={{ margin: 0, color: '#94a3b8', fontSize: '0.84rem', lineHeight: 1.5 }}>
@@ -151,7 +145,7 @@ export default function EnquiryPopup() {
         </div>
 
         {/* Form Body */}
-        <div style={{ padding: '1.8rem 2rem 2rem' }}>
+        <div style={{ padding: 'clamp(1.2rem, 4vw, 1.8rem) clamp(1.2rem, 4vw, 2rem) 2rem' }}>
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: '1rem' }}>
               <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#94a3b8', marginBottom: 5 }}>

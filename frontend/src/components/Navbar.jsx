@@ -100,11 +100,12 @@ export default function Navbar() {
           position: 'absolute', top: '100%', left: 0, right: 0,
           background: 'rgba(5, 6, 8, 0.98)', backdropFilter: 'blur(20px)',
           padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: 10,
-          borderBottom: '1px solid rgba(255,255,255,0.1)'
+          borderBottom: '1px solid rgba(255,255,255,0.1)',
+          maxHeight: 'calc(100vh - 72px)', overflowY: 'auto'
         }}>
           {navLinks.map(link => (
             <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)}
-               style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none', padding: '10px 0',
+               style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none', padding: '12px 0', minHeight: 44, display: 'flex', alignItems: 'center',
                         fontSize: '0.95rem', fontWeight: 600, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
               {link.label}
             </a>
@@ -121,7 +122,7 @@ export default function Navbar() {
       )}
 
       <style>{`
-        @media (max-width: 860px) {
+        @media (max-width: 1024px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: flex !important; }
         }

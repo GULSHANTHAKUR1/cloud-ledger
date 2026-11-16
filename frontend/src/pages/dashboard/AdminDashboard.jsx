@@ -62,7 +62,7 @@ export default function AdminDashboard() {
     cat: 'GST',
     excerpt: '',
     content: '',
-    author: 'Senior CA Desk'
+    author: 'Advisory Desk'
   })
 
   // Change Password Modal
@@ -206,7 +206,7 @@ export default function AdminDashboard() {
       date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
       excerpt: newArticleForm.excerpt.trim(),
       content: newArticleForm.content.trim(),
-      author: newArticleForm.author.trim() || 'Senior CA Desk',
+      author: newArticleForm.author.trim() || 'Advisory Desk',
       createdAt: new Date().toISOString()
     }
 
@@ -224,7 +224,7 @@ export default function AdminDashboard() {
 
     setShowArticleModal(false)
     setCreatingArticle(false)
-    setNewArticleForm({ title: '', cat: 'GST', excerpt: '', content: '', author: 'Senior CA Desk' })
+    setNewArticleForm({ title: '', cat: 'GST', excerpt: '', content: '', author: 'Advisory Desk' })
     loadArticles()
   }
 
@@ -688,7 +688,7 @@ export default function AdminDashboard() {
                           {art.date}
                         </td>
                         <td style={{ padding: '14px 18px', color: '#475569', fontWeight: 600 }}>
-                          {art.author || 'Senior CA Desk'}
+                          {art.author || 'Advisory Desk'}
                         </td>
                         <td style={{ padding: '14px 18px', textAlign: 'right' }}>
                           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 6 }}>

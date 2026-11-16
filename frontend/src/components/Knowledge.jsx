@@ -186,7 +186,7 @@ export default function Knowledge() {
       `📅 Date: ${art.date} | Category: ${art.cat}\n\n` +
       `${art.excerpt}\n\n` +
       `Read full update on Cloud Ledger: https://cloudledger.in\n` +
-      `For advisory or filing help, contact CA Desk: +91 78272 25372`
+      `For advisory or filing help, contact Corporate Advisory Desk: +91 78272 25372`
     )
     window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, '_blank')
   }
@@ -213,7 +213,7 @@ export default function Knowledge() {
               </span>
             </h2>
             <p className="section-desc" style={{ color: '#94a3b8' }}>
-              Published directly by our team of Chartered Accountants, Company Secretaries, and Legal Advocates to keep your business ahead of regulatory shifts.
+              Published directly by our team of Corporate Advisory Specialists, Company Secretaries, and Legal Advocates to keep your business ahead of regulatory shifts.
             </p>
           </div>
 
@@ -300,7 +300,7 @@ export default function Knowledge() {
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between'
                 }}>
                   <span style={{ color: '#64748b', fontSize: '0.75rem', fontWeight: 600 }}>
-                    <i className="fas fa-feather-alt" style={{ marginRight: 4, color: '#10b981' }} /> {art.author || 'CA Desk'}
+                    <i className="fas fa-feather-alt" style={{ marginRight: 4, color: '#10b981' }} /> {art.author || 'Advisory Desk'}
                   </span>
                   <span style={{ color: '#38bdf8', fontSize: '0.78rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4 }}>
                     Read Complete Brief <i className="fas fa-arrow-right" style={{ fontSize: '0.7rem' }} />
@@ -369,11 +369,11 @@ export default function Knowledge() {
 
               <div style={{ padding: '14px', borderRadius: 12, background: 'rgba(29,185,84,0.08)', border: '1px solid rgba(29,185,84,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
                 <div>
-                  <div style={{ fontWeight: 700, color: '#0A1F44', fontSize: '0.85rem' }}>
+                  <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.85rem' }}>
                     Need professional advisory on this notification?
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: '#64748b' }}>
-                    Connect with our practicing Chartered Accountants on WhatsApp.
+                  <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+                    Connect with our practicing Compliance Specialists on WhatsApp.
                   </div>
                 </div>
                 <button
@@ -389,13 +389,13 @@ export default function Knowledge() {
             </div>
 
             {/* Modal Footer */}
-            <div style={{ padding: '1rem 2rem', background: '#f8fafc', borderTop: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.78rem', color: '#64748b' }}>
-                Desk Author: <strong>{activeArticle.author || 'Senior CA Desk'}</strong>
+            <div style={{ padding: '1rem 2rem', background: '#090a0d', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+                Desk Author: <strong style={{ color: '#ffffff' }}>{activeArticle.author || 'Advisory Desk'}</strong>
               </span>
               <button
                 onClick={() => setActiveArticle(null)}
-                style={{ background: '#0A1F44', color: 'white', border: 'none', padding: '8px 18px', borderRadius: 8, fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer' }}
+                style={{ background: '#1e60ff', color: 'white', border: 'none', padding: '8px 18px', borderRadius: 8, fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer' }}
               >
                 Close Brief
               </button>

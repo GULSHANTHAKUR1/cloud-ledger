@@ -52,7 +52,7 @@ export default function About() {
               Whether you are an emerging startup incorporating your first Private Limited company, an SME navigating monthly GST and TDS filings, or an established institutional enterprise requiring internal audit reviews, Cloud Ledger ensures peace of mind through diligent execution.
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }} className="about-mission-grid">
               <div style={{ borderLeft: '3px solid #10b981', paddingLeft: '1rem' }}>
                 <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '1.1rem' }}>Our Mission</div>
                 <div style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: 4 }}>
@@ -114,6 +114,7 @@ export default function About() {
         }
         @media (max-width: 550px) {
           #about .container > div:last-child { grid-template-columns: 1fr !important; }
+          .about-mission-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
         }
       `}</style>
     </section>

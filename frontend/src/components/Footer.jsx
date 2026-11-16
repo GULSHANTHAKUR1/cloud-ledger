@@ -109,10 +109,10 @@ export default function Footer() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 960px) {
           footer .container > div:first-child { grid-template-columns: 1fr 1fr !important; }
         }
-        @media (max-width: 500px) {
+        @media (max-width: 540px) {
           footer .container > div:first-child { grid-template-columns: 1fr !important; }
         }
       `}</style>
